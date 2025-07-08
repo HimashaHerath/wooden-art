@@ -1,8 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
-import SiteHeader from "@/components/SiteHeader";
-import SiteFooter from "@/components/SiteFooter";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -30,7 +28,7 @@ export default async function ContactPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50">
-      <SiteHeader />
+
 
       {/* Breadcrumb */}
       <div className="container mx-auto px-4 py-4">
@@ -179,7 +177,7 @@ export default async function ContactPage() {
         </div>
       </div>
 
-      <SiteFooter />
+
     </div>
   );
 }

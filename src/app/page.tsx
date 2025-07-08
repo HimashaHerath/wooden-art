@@ -1,8 +1,6 @@
 import ProductCard from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import SiteHeader from "@/components/SiteHeader";
-import SiteFooter from "@/components/SiteFooter";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -53,7 +51,7 @@ export default async function Home() {
   
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50">
-      <SiteHeader />
+
 
       {/* Hero Section */}
       <section className="py-20 px-4">
@@ -119,7 +117,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <SiteFooter />
+
     </div>
   );
 }
