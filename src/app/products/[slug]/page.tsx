@@ -6,25 +6,42 @@ import Link from "next/link";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { notFound } from "next/navigation";
-
-interface ProductPageProps {
-  params: Promise<{ slug: string }>;
+interface GalleryItem {
+  image: string;
+  alt: string;
 }
 
-async function getProduct(slug: string) {
+interface Product {
+  _sys: { filename: string };
+  name: string;
+  description: string;
+  price: number;
+  category: string;
+  featured_image: string;
+  gallery?: GalleryItem[];
+  dimensions?: string;
+  material: string;
+  available: boolean;
+  featured: boolean;
+  status: string;
+  content: string;
+}
+
+import { notFound } from "next/navigation";
+
+async function getProduct(slug: string): Promise<Product | null> {
   try {
     const filePath = path.join(process.cwd(), "content/products", `${slug}.md`);
     const fileContents = fs.readFileSync(filePath, "utf8");
     const { data, content } = matter(fileContents);
     
     return {
-      ...data,
+      ...(data as Omit<Product, "content" | "_sys">),
       content,
       _sys: {
         filename: slug,
       },
-    };
+    } as Product;
   } catch (error) {
     console.error("Error reading product:", error);
     return null;
@@ -45,7 +62,7 @@ export async function generateStaticParams() {
   }
 }
 
-export default async function ProductPage({ params }: ProductPageProps) {
+export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const product = await getProduct(slug);
 
@@ -123,7 +140,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             {/* Gallery */}
             {product.gallery && product.gallery.length > 0 && (
               <div className="grid grid-cols-3 gap-4">
-                {product.gallery.map((item: any, index: number) => (
+                {product.gallery.map((item: GalleryItem, index: number) => (
                   <div key={index} className="relative h-24 overflow-hidden rounded-lg">
                     <Image
                       src={item.image}
@@ -142,7 +159,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <div>
               <h1 className="text-4xl font-bold text-amber-900 mb-2">{product.name}</h1>
               <div className="flex items-center gap-4 mb-4">
-                <span className="text-3xl font-bold text-amber-600">${product.price}</span>
+                <span className="text-3xl font-bold text-amber-600">{`$${product.price}`}</span>
                 <Badge variant="outline" className="text-amber-700 border-amber-300">
                   {product.category}
                 </Badge>

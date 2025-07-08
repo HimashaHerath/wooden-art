@@ -50,7 +50,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             {product.name}
           </CardTitle>
           <span className="text-2xl font-bold text-amber-600">
-            ${product.price}
+            {`$${product.price}`}
           </span>
         </div>
         <CardDescription className="text-gray-600 line-clamp-2">

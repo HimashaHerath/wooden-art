@@ -6,9 +6,6 @@ const nextConfig = {
     unoptimized: true
   },
   // Disable server-side features for static export
-  experimental: {
-    missingSuspenseWithCSRBailout: false,
-  }
 }
 
 module.exports = nextConfig
