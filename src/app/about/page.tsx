@@ -1,4 +1,3 @@
-import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import fs from "fs";
 import path from "path";
@@ -24,33 +23,7 @@ export default async function AboutPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50">
-      {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-amber-200 sticky top-0 z-10">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center space-x-4">
-              <h1 className="text-3xl font-bold text-amber-800">🌳 Wooden Art</h1>
-              <Badge variant="outline" className="text-amber-700 border-amber-300">
-                Handcrafted
-              </Badge>
-            </Link>
-            <nav className="hidden md:flex space-x-6">
-              <Link href="/" className="text-amber-700 hover:text-amber-900 font-medium">
-                Home
-              </Link>
-              <Link href="/products" className="text-amber-700 hover:text-amber-900 font-medium">
-                Products
-              </Link>
-              <Link href="/about" className="text-amber-700 hover:text-amber-900 font-medium">
-                About
-              </Link>
-              <Link href="/contact" className="text-amber-700 hover:text-amber-900 font-medium">
-                Contact
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </header>
+
 
       {/* Breadcrumb */}
       <div className="container mx-auto px-4 py-4">
@@ -103,40 +76,7 @@ export default async function AboutPage() {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="bg-amber-800 text-white py-12 px-4">
-        <div className="container mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-              <h4 className="text-2xl font-bold mb-4">🌳 Wooden Art</h4>
-              <p className="text-amber-100">
-                Handcrafted wooden pieces made with passion and precision. 
-                Each item tells a story of natural beauty and skilled craftsmanship.
-              </p>
-            </div>
-            <div>
-              <h5 className="text-lg font-semibold mb-4">Quick Links</h5>
-              <ul className="space-y-2 text-amber-100">
-                <li><Link href="/" className="hover:text-white">Home</Link></li>
-                <li><Link href="/products" className="hover:text-white">Products</Link></li>
-                <li><Link href="/about" className="hover:text-white">About</Link></li>
-                <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h5 className="text-lg font-semibold mb-4">Contact Info</h5>
-              <div className="text-amber-100 space-y-2">
-                <p>📧 info@woodenart.com</p>
-                <p>📞 (555) 123-4567</p>
-                <p>📍 123 Craftsman Lane, Woodville</p>
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-amber-700 mt-8 pt-8 text-center text-amber-100">
-            <p>&copy; 2024 Wooden Art. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+
     </div>
   );
 }
