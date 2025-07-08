@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import Image from "next/image";
 import Link from "next/link";
 import fs from "fs";
@@ -144,35 +145,40 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 )}
               </div>
             </div>
-
-            <div className="prose prose-amber max-w-none">
-              <div dangerouslySetInnerHTML={{ __html: product.content.replace(/\n/g, '<br/>') }} />
-            </div>
-
-            {/* Specifications */}
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-amber-900 mb-4">Specifications</h3>
-                <dl className="space-y-2">
-                  {product.dimensions && (
-                    <>
-                      <dt className="text-sm font-medium text-amber-700">Dimensions</dt>
-                      <dd className="text-amber-600">{product.dimensions}</dd>
-                    </>
-                  )}
-                  {product.material && (
-                    <>
-                      <dt className="text-sm font-medium text-amber-700">Material</dt>
-                      <dd className="text-amber-600">{product.material}</dd>
-                    </>
-                  )}
-                  <dt className="text-sm font-medium text-amber-700">Availability</dt>
-                  <dd className="text-amber-600">{product.status}</dd>
-                  <dt className="text-sm font-medium text-amber-700">Category</dt>
-                  <dd className="text-amber-600">{product.category}</dd>
-                </dl>
-              </CardContent>
-            </Card>
+            <Tabs defaultValue="details" className="space-y-4">
+              <TabsList>
+                <TabsTrigger value="details">Details</TabsTrigger>
+                <TabsTrigger value="specs">Specifications</TabsTrigger>
+              </TabsList>
+              <TabsContent value="details" className="prose prose-amber max-w-none">
+                <div dangerouslySetInnerHTML={{ __html: product.content.replace(/\n/g, '<br/>') }} />
+              </TabsContent>
+              <TabsContent value="specs">
+                <Card>
+                  <CardContent className="p-6">
+                    <h3 className="text-lg font-semibold text-amber-900 mb-4">Specifications</h3>
+                    <dl className="space-y-2">
+                      {product.dimensions && (
+                        <>
+                          <dt className="text-sm font-medium text-amber-700">Dimensions</dt>
+                          <dd className="text-amber-600">{product.dimensions}</dd>
+                        </>
+                      )}
+                      {product.material && (
+                        <>
+                          <dt className="text-sm font-medium text-amber-700">Material</dt>
+                          <dd className="text-amber-600">{product.material}</dd>
+                        </>
+                      )}
+                      <dt className="text-sm font-medium text-amber-700">Availability</dt>
+                      <dd className="text-amber-600">{product.status}</dd>
+                      <dt className="text-sm font-medium text-amber-700">Category</dt>
+                      <dd className="text-amber-600">{product.category}</dd>
+                    </dl>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            </Tabs>
 
             {/* Actions */}
             <div className="space-y-4">

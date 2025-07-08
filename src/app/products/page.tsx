@@ -1,5 +1,4 @@
-import ProductCard from "@/components/ProductCard";
-import { Badge } from "@/components/ui/badge";
+import ProductGrid from "@/components/ProductGrid";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import fs from "fs";
@@ -65,17 +64,7 @@ export default async function ProductsPage() {
             Each item is unique and made with the finest attention to detail.
           </p>
           
-          {/* Categories */}
-          <div className="flex flex-wrap justify-center gap-2 mb-8">
-            <Badge variant="default" className="bg-amber-600 text-white px-4 py-2">
-              All Products ({products.length})
-            </Badge>
-            {categories.map((category) => (
-              <Badge key={category} variant="outline" className="border-amber-300 text-amber-700 px-4 py-2">
-                {category} ({products.filter(p => p.category === category).length})
-              </Badge>
-            ))}
-          </div>
+          <p className="text-amber-600">Choose a category to filter the catalog.</p>
         </div>
       </section>
 
@@ -83,11 +72,7 @@ export default async function ProductsPage() {
       <section className="py-16 px-4 bg-white/50">
         <div className="container mx-auto">
           {products.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {products.map((product) => (
-                <ProductCard key={product._sys.filename} product={product} />
-              ))}
-            </div>
+            <ProductGrid products={products} categories={categories} />
           ) : (
             <div className="text-center py-12">
               <div className="text-6xl mb-4">🌳</div>
