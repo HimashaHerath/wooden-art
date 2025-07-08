@@ -1,0 +1,249 @@
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import Image from "next/image";
+import Link from "next/link";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import { notFound } from "next/navigation";
+
+interface ProductPageProps {
+  params: Promise<{ slug: string }>;
+}
+
+async function getProduct(slug: string) {
+  try {
+    const filePath = path.join(process.cwd(), "content/products", `${slug}.md`);
+    const fileContents = fs.readFileSync(filePath, "utf8");
+    const { data, content } = matter(fileContents);
+    
+    return {
+      ...data,
+      content,
+      _sys: {
+        filename: slug,
+      },
+    };
+  } catch (error) {
+    console.error("Error reading product:", error);
+    return null;
+  }
+}
+
+export async function generateStaticParams() {
+  try {
+    const productsDirectory = path.join(process.cwd(), "content/products");
+    const filenames = fs.readdirSync(productsDirectory);
+    
+    return filenames.map((filename) => ({
+      slug: filename.replace(/\.md$/, ""),
+    }));
+  } catch (error) {
+    console.error("Error generating static params:", error);
+    return [];
+  }
+}
+
+export default async function ProductPage({ params }: ProductPageProps) {
+  const { slug } = await params;
+  const product = await getProduct(slug);
+
+  if (!product) {
+    notFound();
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50">
+      {/* Header */}
+      <header className="bg-white/80 backdrop-blur-sm border-b border-amber-200 sticky top-0 z-10">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <Link href="/" className="flex items-center space-x-4">
+              <h1 className="text-3xl font-bold text-amber-800">🌳 Wooden Art</h1>
+              <Badge variant="outline" className="text-amber-700 border-amber-300">
+                Handcrafted
+              </Badge>
+            </Link>
+            <nav className="hidden md:flex space-x-6">
+              <Link href="/" className="text-amber-700 hover:text-amber-900 font-medium">
+                Home
+              </Link>
+              <Link href="/products" className="text-amber-700 hover:text-amber-900 font-medium">
+                Products
+              </Link>
+              <Link href="/about" className="text-amber-700 hover:text-amber-900 font-medium">
+                About
+              </Link>
+              <Link href="/contact" className="text-amber-700 hover:text-amber-900 font-medium">
+                Contact
+              </Link>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      {/* Breadcrumb */}
+      <div className="container mx-auto px-4 py-4">
+        <nav className="text-sm text-amber-600">
+          <Link href="/" className="hover:text-amber-800">Home</Link>
+          <span className="mx-2">›</span>
+          <Link href="/products" className="hover:text-amber-800">Products</Link>
+          <span className="mx-2">›</span>
+          <span className="text-amber-800 font-medium">{product.name}</span>
+        </nav>
+      </div>
+
+      {/* Product Details */}
+      <div className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Images */}
+          <div className="space-y-4">
+            <div className="relative h-96 lg:h-[500px] overflow-hidden rounded-lg">
+              <Image
+                src={product.featured_image || "/placeholder-image.jpg"}
+                alt={product.name}
+                fill
+                className="object-cover"
+                priority
+              />
+              {product.featured && (
+                <Badge className="absolute top-4 left-4 bg-amber-500 text-white">
+                  Featured
+                </Badge>
+              )}
+              <Badge 
+                variant={product.available ? "default" : "destructive"} 
+                className="absolute top-4 right-4"
+              >
+                {product.status}
+              </Badge>
+            </div>
+            
+            {/* Gallery */}
+            {product.gallery && product.gallery.length > 0 && (
+              <div className="grid grid-cols-3 gap-4">
+                {product.gallery.map((item: any, index: number) => (
+                  <div key={index} className="relative h-24 overflow-hidden rounded-lg">
+                    <Image
+                      src={item.image}
+                      alt={item.alt}
+                      fill
+                      className="object-cover hover:scale-105 transition-transform cursor-pointer"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Product Info */}
+          <div className="space-y-6">
+            <div>
+              <h1 className="text-4xl font-bold text-amber-900 mb-2">{product.name}</h1>
+              <div className="flex items-center gap-4 mb-4">
+                <span className="text-3xl font-bold text-amber-600">${product.price}</span>
+                <Badge variant="outline" className="text-amber-700 border-amber-300">
+                  {product.category}
+                </Badge>
+                {product.material && (
+                  <Badge variant="outline" className="text-amber-700 border-amber-300">
+                    {product.material}
+                  </Badge>
+                )}
+              </div>
+            </div>
+
+            <div className="prose prose-amber max-w-none">
+              <div dangerouslySetInnerHTML={{ __html: product.content.replace(/\n/g, '<br/>') }} />
+            </div>
+
+            {/* Specifications */}
+            <Card>
+              <CardContent className="p-6">
+                <h3 className="text-lg font-semibold text-amber-900 mb-4">Specifications</h3>
+                <dl className="space-y-2">
+                  {product.dimensions && (
+                    <>
+                      <dt className="text-sm font-medium text-amber-700">Dimensions</dt>
+                      <dd className="text-amber-600">{product.dimensions}</dd>
+                    </>
+                  )}
+                  {product.material && (
+                    <>
+                      <dt className="text-sm font-medium text-amber-700">Material</dt>
+                      <dd className="text-amber-600">{product.material}</dd>
+                    </>
+                  )}
+                  <dt className="text-sm font-medium text-amber-700">Availability</dt>
+                  <dd className="text-amber-600">{product.status}</dd>
+                  <dt className="text-sm font-medium text-amber-700">Category</dt>
+                  <dd className="text-amber-600">{product.category}</dd>
+                </dl>
+              </CardContent>
+            </Card>
+
+            {/* Actions */}
+            <div className="space-y-4">
+              {product.available ? (
+                <div className="space-y-3">
+                  <Button size="lg" className="w-full bg-amber-600 hover:bg-amber-700">
+                    Contact for Purchase
+                  </Button>
+                  <Button variant="outline" size="lg" className="w-full border-amber-300 text-amber-700">
+                    Ask a Question
+                  </Button>
+                </div>
+              ) : (
+                <Button disabled size="lg" className="w-full">
+                  Currently Unavailable
+                </Button>
+              )}
+              
+              <div className="text-sm text-amber-600">
+                <p>🚚 Free shipping within the continental US</p>
+                <p>📞 Questions? Call us at (555) 123-4567</p>
+                <p>✉️ Email us at info@woodenart.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className="bg-amber-800 text-white py-12 px-4 mt-16">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <h4 className="text-2xl font-bold mb-4">🌳 Wooden Art</h4>
+              <p className="text-amber-100">
+                Handcrafted wooden pieces made with passion and precision. 
+                Each item tells a story of natural beauty and skilled craftsmanship.
+              </p>
+            </div>
+            <div>
+              <h5 className="text-lg font-semibold mb-4">Quick Links</h5>
+              <ul className="space-y-2 text-amber-100">
+                <li><Link href="/" className="hover:text-white">Home</Link></li>
+                <li><Link href="/products" className="hover:text-white">Products</Link></li>
+                <li><Link href="/about" className="hover:text-white">About</Link></li>
+                <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h5 className="text-lg font-semibold mb-4">Contact Info</h5>
+              <div className="text-amber-100 space-y-2">
+                <p>📧 info@woodenart.com</p>
+                <p>📞 (555) 123-4567</p>
+                <p>📍 123 Craftsman Lane, Woodville</p>
+              </div>
+            </div>
+          </div>
+          <div className="border-t border-amber-700 mt-8 pt-8 text-center text-amber-100">
+            <p>&copy; 2024 Wooden Art. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
