@@ -2,8 +2,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import Breadcrumb from "@/components/Breadcrumb";
 import Image from "next/image";
-import Link from "next/link";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -76,15 +76,12 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
 
       {/* Breadcrumb */}
-      <div className="container mx-auto px-4 py-4">
-        <nav className="text-sm text-amber-600">
-          <Link href="/" className="hover:text-amber-800">Home</Link>
-          <span className="mx-2">›</span>
-          <Link href="/products" className="hover:text-amber-800">Products</Link>
-          <span className="mx-2">›</span>
-          <span className="text-amber-800 font-medium">{product.name}</span>
-        </nav>
-      </div>
+      <Breadcrumb 
+        items={[
+          { label: "Products", href: "/products" },
+          { label: product.name }
+        ]} 
+      />
 
       {/* Product Details */}
       <div className="container mx-auto px-4 py-8">

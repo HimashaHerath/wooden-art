@@ -4,6 +4,8 @@ import Link from "next/link";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 async function getContactContent() {
   try {
@@ -50,13 +52,29 @@ export default async function ContactPage() {
               <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-lg p-8">
                 <h2 className="text-2xl font-semibold text-amber-900 mb-6">Get in Touch</h2>
                 
-                <div className="prose prose-amber max-w-none mb-8">
-                  <div 
-                    className="text-amber-800 leading-relaxed"
-                    dangerouslySetInnerHTML={{ 
-                      __html: contactContent.content.replace(/\n/g, '<br/>').replace(/##\s*(.*)/g, '<h3 class="text-xl font-semibold text-amber-900 mt-6 mb-3">$1</h3>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                    }} 
-                  />
+                <div className="prose prose-amber max-w-none mb-8 text-amber-800 leading-relaxed">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                      h1: ({ children }) => (
+                        <h1 className="text-2xl font-bold text-amber-900 mt-6 mb-4">{children}</h1>
+                      ),
+                      h2: ({ children }) => (
+                        <h2 className="text-xl font-semibold text-amber-900 mt-6 mb-3">{children}</h2>
+                      ),
+                      h3: ({ children }) => (
+                        <h3 className="text-lg font-semibold text-amber-900 mt-4 mb-2">{children}</h3>
+                      ),
+                      p: ({ children }) => (
+                        <p className="mb-4 text-amber-800">{children}</p>
+                      ),
+                      strong: ({ children }) => (
+                        <strong className="font-semibold text-amber-900">{children}</strong>
+                      ),
+                    }}
+                  >
+                    {contactContent.content}
+                  </ReactMarkdown>
                 </div>
 
                 <div className="space-y-4">
