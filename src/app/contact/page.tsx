@@ -188,8 +188,8 @@ export default async function ContactPage() {
             <div className="bg-amber-600 text-white rounded-lg p-8">
               <h3 className="text-2xl font-bold mb-4">Ready to Get Started?</h3>
               <p className="text-amber-100 mb-6">
-                Whether you're interested in our existing pieces or want to commission something custom, 
-                we're here to help bring your vision to life.
+                Whether you&apos;re interested in our existing pieces or want to commission something custom,
+                we&apos;re here to help bring your vision to life.
               </p>
               <div className="flex gap-4 justify-center">
                 <Button variant="secondary" size="lg">

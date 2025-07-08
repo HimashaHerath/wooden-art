@@ -6,22 +6,37 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
-async function getProducts() {
+interface Product {
+  _sys: { filename: string };
+  name: string;
+  description: string;
+  price: number;
+  category: string;
+  featured_image: string;
+  gallery?: { image: string; alt: string }[];
+  dimensions?: string;
+  material: string;
+  available: boolean;
+  featured: boolean;
+  status: string;
+}
+
+async function getProducts(): Promise<Product[]> {
   const productsDirectory = path.join(process.cwd(), "content/products");
   
   try {
     const filenames = fs.readdirSync(productsDirectory);
-    const products = filenames.map((filename) => {
+    const products: Product[] = filenames.map((filename) => {
       const filePath = path.join(productsDirectory, filename);
       const fileContents = fs.readFileSync(filePath, "utf8");
       const { data } = matter(fileContents);
-      
+
       return {
-        ...data,
+        ...(data as Omit<Product, "_sys">),
         _sys: {
           filename: filename.replace(/\.md$/, ""),
         },
-      };
+      } as Product;
     });
     
     return products;

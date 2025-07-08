@@ -6,22 +6,37 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
-async function getProducts() {
+interface Product {
+  _sys: { filename: string };
+  name: string;
+  description: string;
+  price: number;
+  category: string;
+  featured_image: string;
+  gallery?: { image: string; alt: string }[];
+  dimensions?: string;
+  material: string;
+  available: boolean;
+  featured: boolean;
+  status: string;
+}
+
+async function getProducts(): Promise<Product[]> {
   const productsDirectory = path.join(process.cwd(), "content/products");
   
   try {
     const filenames = fs.readdirSync(productsDirectory);
-    const products = filenames.map((filename) => {
+    const products: Product[] = filenames.map((filename) => {
       const filePath = path.join(productsDirectory, filename);
       const fileContents = fs.readFileSync(filePath, "utf8");
       const { data } = matter(fileContents);
-      
+
       return {
-        ...data,
+        ...(data as Omit<Product, "_sys">),
         _sys: {
           filename: filename.replace(/\.md$/, ""),
         },
-      };
+      } as Product;
     });
     
     return products;
@@ -118,11 +133,11 @@ export default async function ProductsPage() {
       <section className="py-16 px-4">
         <div className="container mx-auto text-center">
           <h3 className="text-3xl font-bold text-amber-900 mb-4">
-            Don't See What You're Looking For?
+            Don&apos;t See What You&apos;re Looking For?
           </h3>
           <p className="text-xl text-amber-700 mb-8 max-w-2xl mx-auto">
-            We specialize in custom wooden art pieces. Contact us to discuss your vision, 
-            and we'll work together to create something truly unique.
+            We specialize in custom wooden art pieces. Contact us to discuss your vision,
+            and we&apos;ll work together to create something truly unique.
           </p>
           <div className="flex gap-4 justify-center">
             <Button asChild size="lg" className="bg-amber-600 hover:bg-amber-700">
