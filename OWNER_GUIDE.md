@@ -2,105 +2,105 @@
 
 ## Welcome to Your New Website!
 
-Congratulations! Your new wooden art e-commerce website is ready. This guide will show you exactly how to manage your products without any technical knowledge required.
+Congratulations! Your new wooden art e-commerce website is ready. This guide will show you exactly how to manage your products using the professional Sanity Studio - no technical knowledge required.
 
 ## 🚀 Quick Start
 
-### Step 1: Access Your Admin Dashboard
+### Step 1: Access Your Content Studio
 1. Open your web browser
-2. Go to **yourdomain.com/admin** (replace with your actual domain)
-3. You'll see a login screen
+2. Go to **yourdomain.com/studio** (replace with your actual domain)
+3. You'll see the Sanity Studio login screen
 
 ### Step 2: First Time Setup (Done by Developer)
 *Note: This step is handled during deployment by your developer*
-- Netlify Identity will be configured 
-- You'll receive an email invitation to create your account
-- Follow the link in the email to set your password
+- You'll receive an email invitation to join the Sanity project
+- Follow the link in the email to create your account
+- Set up your password through the secure Sanity authentication
 
 ### Step 3: Login
 1. Enter your email address
 2. Enter your password  
-3. Click "Login"
+3. Click "Sign in"
+4. You'll see the beautiful Sanity Studio interface
 
 ## 📝 Managing Products
 
 ### Adding a New Product
 
-1. **Login** to your admin dashboard
-2. Click **"Products"** in the sidebar
-3. Click **"New Product"** button
-4. Fill out the form:
+1. **Login** to your Sanity Studio
+2. Look for **"Product"** in the main content area
+3. Click **"Create"** button (+ icon)
+4. Fill out the visual form:
 
    **Required Fields:**
    - **Product Name**: e.g., "Handcrafted Oak Bowl"
-   - **Description**: Write about your product (supports rich text formatting)
-   - **Price**: Enter just the number (e.g., 85.00)
-   - **Category**: Choose from dropdown (Sculptures, Furniture, etc.)
-   - **Featured Image**: Drag & drop your main product photo
-   - **Available for Purchase**: Check this box if it's for sale
+   - **Slug**: Auto-generated from name (URL-friendly version)
+   - **Short Description**: Brief summary for product listings
+   - **Price**: Enter the number (e.g., 85)
+   - **Category**: Choose from dropdown (functional, decorative, etc.)
+   - **Featured Image**: Click to upload or drag & drop your main photo
+   - **Available for Purchase**: Toggle switch
    - **Status**: Choose "In Stock", "Made to Order", etc.
 
    **Optional Fields:**
-   - **Image Gallery**: Add more photos by clicking "Add Image"
-   - **Dimensions**: e.g., "12\" x 8\" x 4\""
-   - **Wood Type/Material**: e.g., "White Oak"
-   - **Featured Product**: Check to show on homepage
+   - **Gallery Images**: Click "Add item" to upload more photos
+   - **Dimensions**: e.g., "12\" diameter x 4\" height"
+   - **Material**: e.g., "White Oak"
+   - **Featured Product**: Toggle to show on homepage
+   - **Detailed Description**: Rich text with formatting options
 
-5. Click **"Save"** when done
-6. Wait 1-2 minutes - your website will automatically update!
+5. Click **"Publish"** when done
+6. Your changes appear instantly on the website!
 
 ### Editing an Existing Product
 
-1. **Login** to your admin dashboard
-2. Click **"Products"** in the sidebar
+1. **Login** to your Sanity Studio
+2. You'll see a list of all your products
 3. Click on the product you want to edit
-4. Make your changes
-5. Click **"Save"**
-6. Wait 1-2 minutes for changes to appear on your website
+4. Make your changes in the visual editor
+5. Click **"Publish"** to save changes
+6. Changes appear instantly on your website
 
 ### Deleting a Product
 
-1. **Login** to your admin dashboard
-2. Click **"Products"** in the sidebar
-3. Click on the product you want to delete
-4. Click the **"Delete"** button
-5. Confirm the deletion
-6. Wait 1-2 minutes for the product to disappear from your website
+1. **Login** to your Sanity Studio
+2. Click on the product you want to delete
+3. Click the **"Delete"** button (trash icon) in the document toolbar
+4. Confirm the deletion in the popup
+5. The product immediately disappears from your website
 
 ## 📸 Managing Images
 
 ### Uploading Product Images
 
 1. When adding/editing a product, find the image fields
-2. **For Featured Image**: Drag and drop your main photo, or click to browse
+2. **For Featured Image**: 
+   - Click the image area to open uploader
+   - Drag and drop your main photo, or click "Select files"
+   - Use the crop tool to frame your image perfectly
 3. **For Gallery Images**: 
-   - Click "Add Image"
-   - Drag and drop photo or click to browse
-   - Add a description in "Alt Text" (e.g., "Oak bowl from side angle")
+   - Click "Add item" in the Gallery section
+   - Upload your photo using drag & drop or file selector
+   - Add descriptive "Alt Text" (e.g., "Oak bowl from side angle")
+   - Use the hotspot tool to set focus point for cropping
    - Repeat for more images
 
 ### Image Tips
-- **Best size**: 800x600 pixels or larger
-- **Format**: JPG or PNG work best
+- **Automatic Optimization**: Sanity automatically optimizes your images for web
+- **Best size**: 800x600 pixels or larger (Sanity will resize automatically)
+- **Format**: JPG, PNG, or WebP all work perfectly
 - **Good lighting**: Natural light shows wood grain beautifully
 - **Multiple angles**: Show front, side, and detail shots
-- **File names**: Use descriptive names like "oak-bowl-main.jpg"
+- **Crop Tool**: Use the built-in cropper for perfect framing
 
 ## 🎨 Updating Website Pages
 
-### About Page
-1. Login to admin dashboard
-2. Click **"Pages"** in sidebar
-3. Click **"About Page"**
-4. Edit the content using the rich text editor
-5. Click **"Save"**
+**Note**: The About and Contact pages are currently static (built into the website code). If you need to update these pages regularly, ask your developer to create editable page content in Sanity Studio.
 
-### Contact Page
-1. Login to admin dashboard
-2. Click **"Pages"** in sidebar  
-3. Click **"Contact Page"**
-4. Update your contact information
-5. Click **"Save"**
+### Current Page Management
+- **About Page**: Contact your developer for content updates
+- **Contact Page**: Contact your developer to update business information
+- **Product Pages**: You have full control through Sanity Studio
 
 ## ⭐ Product Features Explained
 
@@ -116,31 +116,38 @@ Congratulations! Your new wooden art e-commerce website is ready. This guide wil
 
 ### Categories
 Use these to organize your products:
-- **Sculptures**: Artistic wood carvings
-- **Furniture**: Tables, chairs, cabinets
-- **Decorative**: Wall art, ornaments
-- **Functional**: Bowls, cutting boards, utensils
-- **Art Pieces**: Unique artistic creations
-- **Custom**: Made-to-order pieces
+- **functional**: Bowls, cutting boards, utensils
+- **decorative**: Wall art, ornaments, display pieces
+- **furniture**: Tables, chairs, cabinets
+- **sculptures**: Artistic wood carvings
+- **kitchen**: Food-safe cutting boards, utensils
+- **home-decor**: Decorative pieces for home styling
+
+*Note: Categories are predefined in the system. Contact your developer to add new categories.*
 
 ## 🔄 How Updates Work
 
-When you save changes in the admin:
-1. Your changes are saved to GitHub (automatic)
-2. Vercel detects the changes (automatic)  
-3. Your website rebuilds with new content (automatic)
-4. Changes appear on your live site (1-2 minutes)
+When you publish changes in Sanity Studio:
+1. Your content is saved to Sanity's secure cloud (instant)
+2. Your website fetches the new content (instant)
+3. Changes appear on your live site immediately
 
-**You don't need to do anything except save!**
+**No waiting! Your changes are live the moment you hit "Publish"!**
+
+### Optional: Automatic Rebuilds
+Your developer can set up webhooks so that:
+- Major content changes trigger a full site rebuild
+- This ensures maximum performance and SEO benefits
+- You'll still see changes instantly, rebuilds happen in background
 
 ## 📱 Mobile Friendly
 
-Your admin dashboard works on:
-- Desktop computers
-- Tablets
-- Smartphones
+Sanity Studio works perfectly on:
+- Desktop computers (best experience)
+- Tablets (great for image uploads)
+- Smartphones (basic editing capabilities)
 
-Your website automatically looks great on all devices.
+Your website automatically looks great on all devices and loads super fast.
 
 ## 🆘 Troubleshooting
 
@@ -150,18 +157,21 @@ Your website automatically looks great on all devices.
 - Contact your developer if issues persist
 
 ### "My changes aren't showing"
-- Wait 2-3 minutes after saving
-- Refresh your browser page
+- Changes should appear instantly - try refreshing your browser
+- Check if you clicked "Publish" (not just "Save Draft")
 - Clear your browser cache (Ctrl+F5 on Windows, Cmd+R on Mac)
 
 ### "I accidentally deleted something"
-- Don't panic! Your developer can restore it from backup
-- Contact them immediately
+- Don't panic! Sanity keeps version history
+- Look for "Revision History" button in the document
+- You can restore previous versions
+- Contact your developer if you need help
 
 ### "Upload failed"
 - Check your internet connection
-- Make sure image is under 10MB
-- Try a different image format (JPG or PNG)
+- Sanity accepts images up to 100MB
+- All common formats work: JPG, PNG, WebP, GIF
+- Try refreshing the page and uploading again
 
 ## 📞 Need Help?
 
@@ -171,7 +181,8 @@ Your website automatically looks great on all devices.
 
 **Quick Reference:**
 - Website: yourdomain.com
-- Admin Dashboard: yourdomain.com/admin
+- Content Studio: yourdomain.com/studio
+- Sanity Dashboard: sanity.io/manage (for project settings)
 - This guide: Keep it bookmarked!
 
 ## 🎯 Best Practices
@@ -191,4 +202,25 @@ Your website automatically looks great on all devices.
 
 ---
 
-**Congratulations! You now have complete control over your website content. No coding required!** 🎉
+## 🌟 What Makes Sanity Studio Special
+
+### Professional Features You'll Love:
+- **Real-time Collaboration**: Multiple people can edit safely
+- **Version History**: See and restore any previous version
+- **Rich Text Editor**: Bold, italics, lists, and more formatting
+- **Image Tools**: Crop, hotspot, and optimize automatically
+- **Draft vs Published**: Work on changes privately before going live
+- **Mobile Responsive**: Edit on any device, anywhere
+- **Secure & Fast**: Enterprise-grade security with instant loading
+
+### Why This is Better Than Basic CMSs:
+- No technical maintenance required
+- Professional editing experience
+- Automatic image optimization
+- Instant global content delivery
+- Built-in backup and version control
+- Scales with your business growth
+
+---
+
+**Congratulations! You now have professional-grade content management. Create beautiful product listings with confidence!** 🎉
