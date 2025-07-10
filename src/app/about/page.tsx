@@ -1,27 +1,24 @@
 import Link from "next/link";
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 
-async function getAboutContent() {
-  try {
-    const filePath = path.join(process.cwd(), "content/pages/about.md");
-    const fileContents = fs.readFileSync(filePath, "utf8");
-    const { data, content } = matter(fileContents);
-    return { ...data, content };
-  } catch (error) {
-    console.error("Error reading about page:", error);
-    return {
-      title: "About Our Wooden Art",
-      content: "Content coming soon..."
-    };
-  }
-}
+export default function AboutPage() {
+  const aboutContent = {
+    title: "About Our Wooden Art",
+    content: `
+      Welcome to our world of handcrafted wooden art, where each piece tells a story of passion, skill, and dedication to the timeless craft of woodworking.
 
-export default async function AboutPage() {
-  const aboutContent = await getAboutContent();
+      ## Our Story
+
+      Founded with a deep love for woodworking and a commitment to creating beautiful, functional pieces, our workshop has been bringing natural beauty into homes for over a decade. What started as a hobby has grown into a full-time passion for creating unique wooden art pieces that stand the test of time.
+
+      ## Our Craft
+
+      Every piece in our collection is carefully handcrafted using traditional techniques combined with modern precision. We believe that the natural beauty of wood should be celebrated and enhanced, not masked. Our skilled artisans work with various hardwoods, each selected for its unique grain patterns, durability, and character.
+
+      ## Our Promise
+
+      When you choose one of our pieces, you're not just buying furniture or decor – you're investing in a piece of art that will bring warmth and natural beauty to your space for generations to come. Each item is made with meticulous attention to detail and finished with care to ensure lasting quality.
+    `
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50">
@@ -43,34 +40,24 @@ export default async function AboutPage() {
             <h1 className="text-4xl font-bold text-amber-900 mb-6">{aboutContent.title}</h1>
             
             <div className="prose prose-amber prose-lg max-w-none text-amber-800 leading-relaxed">
-              <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
-                components={{
-                  h1: ({ children }) => (
-                    <h1 className="text-3xl font-bold text-amber-900 mt-8 mb-4">{children}</h1>
-                  ),
-                  h2: ({ children }) => (
-                    <h2 className="text-2xl font-semibold text-amber-900 mt-8 mb-4">{children}</h2>
-                  ),
-                  h3: ({ children }) => (
-                    <h3 className="text-xl font-semibold text-amber-900 mt-6 mb-3">{children}</h3>
-                  ),
-                  p: ({ children }) => (
-                    <p className="mb-4 text-amber-800">{children}</p>
-                  ),
-                  ul: ({ children }) => (
-                    <ul className="list-disc ml-6 mb-4 space-y-2">{children}</ul>
-                  ),
-                  li: ({ children }) => (
-                    <li className="text-amber-800">{children}</li>
-                  ),
-                  strong: ({ children }) => (
-                    <strong className="font-semibold text-amber-900">{children}</strong>
-                  ),
-                }}
-              >
-                {aboutContent.content}
-              </ReactMarkdown>
+              <p className="mb-6 text-lg">
+                Welcome to our world of handcrafted wooden art, where each piece tells a story of passion, skill, and dedication to the timeless craft of woodworking.
+              </p>
+              
+              <h2 className="text-2xl font-semibold text-amber-900 mt-8 mb-4">Our Story</h2>
+              <p className="mb-4 text-amber-800">
+                Founded with a deep love for woodworking and a commitment to creating beautiful, functional pieces, our workshop has been bringing natural beauty into homes for over a decade. What started as a hobby has grown into a full-time passion for creating unique wooden art pieces that stand the test of time.
+              </p>
+              
+              <h2 className="text-2xl font-semibold text-amber-900 mt-8 mb-4">Our Craft</h2>
+              <p className="mb-4 text-amber-800">
+                Every piece in our collection is carefully handcrafted using traditional techniques combined with modern precision. We believe that the natural beauty of wood should be celebrated and enhanced, not masked. Our skilled artisans work with various hardwoods, each selected for its unique grain patterns, durability, and character.
+              </p>
+              
+              <h2 className="text-2xl font-semibold text-amber-900 mt-8 mb-4">Our Promise</h2>
+              <p className="mb-4 text-amber-800">
+                When you choose one of our pieces, you&apos;re not just buying furniture or decor – you&apos;re investing in a piece of art that will bring warmth and natural beauty to your space for generations to come. Each item is made with meticulous attention to detail and finished with care to ensure lasting quality.
+              </p>
             </div>
           </div>
 

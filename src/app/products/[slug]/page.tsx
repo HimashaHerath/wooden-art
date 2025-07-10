@@ -3,69 +3,19 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import Breadcrumb from "@/components/Breadcrumb";
+import PortableText from "@/components/PortableText";
 import Image from "next/image";
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-interface GalleryItem {
-  image: string;
-  alt: string;
-}
-
-interface Product {
-  _sys: { filename: string };
-  name: string;
-  description: string;
-  price: number;
-  category: string;
-  featured_image: string;
-  gallery?: GalleryItem[];
-  dimensions?: string;
-  material: string;
-  available: boolean;
-  featured: boolean;
-  status: string;
-  content: string;
-}
-
 import { notFound } from "next/navigation";
-
-async function getProduct(slug: string): Promise<Product | null> {
-  try {
-    const filePath = path.join(process.cwd(), "content/products", `${slug}.md`);
-    const fileContents = fs.readFileSync(filePath, "utf8");
-    const { data, content } = matter(fileContents);
-    
-    return {
-      ...(data as Omit<Product, "content" | "_sys">),
-      content,
-      _sys: {
-        filename: slug,
-      },
-    } as Product;
-  } catch (error) {
-    console.error("Error reading product:", error);
-    return null;
-  }
-}
+import { getProductBySlug, getProductSlugs } from "@/lib/sanity.queries";
 
 export async function generateStaticParams() {
-  try {
-    const productsDirectory = path.join(process.cwd(), "content/products");
-    const filenames = fs.readdirSync(productsDirectory);
-    
-    return filenames.map((filename) => ({
-      slug: filename.replace(/\.md$/, ""),
-    }));
-  } catch (error) {
-    console.error("Error generating static params:", error);
-    return [];
-  }
+  const slugs = await getProductSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const product = await getProduct(slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) {
     notFound();
@@ -112,7 +62,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             {/* Gallery */}
             {product.gallery && product.gallery.length > 0 && (
               <div className="grid grid-cols-3 gap-4">
-                {product.gallery.map((item: GalleryItem, index: number) => (
+                {product.gallery.map((item, index: number) => (
                   <div key={index} className="relative h-24 overflow-hidden rounded-lg">
                     <Image
                       src={item.image}
@@ -148,7 +98,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 <TabsTrigger value="specs">Specifications</TabsTrigger>
               </TabsList>
               <TabsContent value="details" className="prose prose-amber max-w-none">
-                <div dangerouslySetInnerHTML={{ __html: product.content.replace(/\n/g, '<br/>') }} />
+                {product.content && product.content.length > 0 ? (
+                  <PortableText content={product.content} />
+                ) : (
+                  <p className="text-amber-700">No detailed description available.</p>
+                )}
               </TabsContent>
               <TabsContent value="specs">
                 <Card>

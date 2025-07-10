@@ -1,32 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 
-async function getContactContent() {
-  try {
-    const filePath = path.join(process.cwd(), "content/pages/contact.md");
-    const fileContents = fs.readFileSync(filePath, "utf8");
-    const { data, content } = matter(fileContents);
-    return { ...data, content };
-  } catch (error) {
-    console.error("Error reading contact page:", error);
-    return {
-      title: "Contact Us",
-      email: "info@woodenart.com",
-      phone: "(555) 123-4567",
-      address: "123 Craftsman Lane\nWoodville, WA 98001\nUnited States",
-      content: "Get in touch with us!"
-    };
-  }
-}
-
-export default async function ContactPage() {
-  const contactContent = await getContactContent();
+export default function ContactPage() {
+  const contactContent = {
+    title: "Contact Us",
+    email: "info@woodenart.com",
+    phone: "(555) 123-4567",
+    address: "123 Craftsman Lane\nWoodville, WA 98001\nUnited States",
+    content: "We'd love to hear from you! Whether you have questions about our existing pieces, want to commission a custom creation, or simply want to learn more about our craft, don't hesitate to reach out."
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50">
@@ -53,28 +36,9 @@ export default async function ContactPage() {
                 <h2 className="text-2xl font-semibold text-amber-900 mb-6">Get in Touch</h2>
                 
                 <div className="prose prose-amber max-w-none mb-8 text-amber-800 leading-relaxed">
-                  <ReactMarkdown
-                    remarkPlugins={[remarkGfm]}
-                    components={{
-                      h1: ({ children }) => (
-                        <h1 className="text-2xl font-bold text-amber-900 mt-6 mb-4">{children}</h1>
-                      ),
-                      h2: ({ children }) => (
-                        <h2 className="text-xl font-semibold text-amber-900 mt-6 mb-3">{children}</h2>
-                      ),
-                      h3: ({ children }) => (
-                        <h3 className="text-lg font-semibold text-amber-900 mt-4 mb-2">{children}</h3>
-                      ),
-                      p: ({ children }) => (
-                        <p className="mb-4 text-amber-800">{children}</p>
-                      ),
-                      strong: ({ children }) => (
-                        <strong className="font-semibold text-amber-900">{children}</strong>
-                      ),
-                    }}
-                  >
+                  <p className="mb-4 text-amber-800">
                     {contactContent.content}
-                  </ReactMarkdown>
+                  </p>
                 </div>
 
                 <div className="space-y-4">

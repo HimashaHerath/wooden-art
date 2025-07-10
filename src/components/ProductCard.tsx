@@ -9,21 +9,10 @@ import { Heart, ShoppingBag, Star, Eye } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
+import { ProductWithImageUrls } from '@/lib/sanity.types'
+
 interface ProductCardProps {
-  product: {
-    _sys: {
-      filename: string;
-    };
-    name: string;
-    description: string;
-    price: number;
-    category: string;
-    featured_image: string;
-    material?: string;
-    status: string;
-    available: boolean;
-    featured: boolean;
-  };
+  product: ProductWithImageUrls;
   className?: string;
 }
 
@@ -124,7 +113,7 @@ export default function ProductCard({ product, className }: ProductCardProps) {
               className="bg-white/90 backdrop-blur-sm hover:bg-white"
               asChild
             >
-              <Link href={`/products/${product._sys.filename}`}>
+              <Link href={`/products/${product.slug.current}`}>
                 <Eye className="w-4 h-4 mr-1" />
                 Quick View
               </Link>
@@ -171,7 +160,7 @@ export default function ProductCard({ product, className }: ProductCardProps) {
             className="flex-1 bg-amber-600 hover:bg-amber-700 text-white"
             size="sm"
           >
-            <Link href={`/products/${product._sys.filename}`}>
+            <Link href={`/products/${product.slug.current}`}>
               <Eye className="w-4 h-4 mr-2" />
               View Details
             </Link>

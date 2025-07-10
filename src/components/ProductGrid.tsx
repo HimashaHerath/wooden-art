@@ -15,21 +15,10 @@ import {
 import { Grid, List, SlidersHorizontal, ArrowUpDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-interface Product {
-  _sys: { filename: string }
-  name: string
-  description: string
-  price: number
-  category: string
-  featured_image: string
-  material?: string
-  available: boolean
-  featured: boolean
-  status: string
-}
+import { ProductWithImageUrls } from '@/lib/sanity.types'
 
 interface ProductGridProps {
-  products: Product[]
+  products: ProductWithImageUrls[]
   categories: string[]
 }
 
@@ -70,8 +59,8 @@ export default function ProductGrid({ products, categories }: ProductGridProps) 
           return b.price - a.price
         
         case 'newest':
-          // Since we don't have dates, use filename as proxy
-          return b._sys.filename.localeCompare(a._sys.filename)
+          // Since we don't have dates, use _id as proxy
+          return b._id.localeCompare(a._id)
         
         default:
           return 0
@@ -222,7 +211,7 @@ export default function ProductGrid({ products, categories }: ProductGridProps) 
         )}>
           {filteredAndSortedProducts.map((product) => (
             <ProductCard 
-              key={product._sys.filename} 
+              key={product._id} 
               product={product}
               className={viewMode === 'list' ? "md:flex md:flex-row md:max-w-none" : ""}
             />

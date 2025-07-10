@@ -3,54 +3,12 @@ import HeroSection from "@/components/HeroSection";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
 import { ArrowRight, Sparkles, Award, Leaf } from "lucide-react";
-
-interface Product {
-  _sys: { filename: string };
-  name: string;
-  description: string;
-  price: number;
-  category: string;
-  featured_image: string;
-  gallery?: { image: string; alt: string }[];
-  dimensions?: string;
-  material?: string;
-  available: boolean;
-  featured: boolean;
-  status: string;
-}
-
-async function getProducts(): Promise<Product[]> {
-  const productsDirectory = path.join(process.cwd(), "content/products");
-  
-  try {
-    const filenames = fs.readdirSync(productsDirectory);
-    const products: Product[] = filenames.map((filename) => {
-      const filePath = path.join(productsDirectory, filename);
-      const fileContents = fs.readFileSync(filePath, "utf8");
-      const { data } = matter(fileContents);
-
-      return {
-        ...(data as Omit<Product, "_sys">),
-        _sys: {
-          filename: filename.replace(/\.md$/, ""),
-        },
-      } as Product;
-    });
-    
-    return products;
-  } catch (error) {
-    console.error("Error reading products:", error);
-    return [];
-  }
-}
+import { getProducts, getFeaturedProducts } from "@/lib/sanity.queries";
 
 export default async function Home() {
   const products = await getProducts();
-  const featuredProducts = products.filter((product) => product.featured);
+  const featuredProducts = await getFeaturedProducts();
   const categories = Array.from(new Set(products.map(product => product.category)));
   
   return (
@@ -78,7 +36,7 @@ export default async function Home() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
               {featuredProducts.map((product) => (
-                <ProductCard key={product._sys.filename} product={product} />
+                <ProductCard key={product._id} product={product} />
               ))}
             </div>
             
