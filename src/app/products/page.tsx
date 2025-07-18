@@ -1,4 +1,5 @@
 import ProductGrid from "@/components/ProductGrid";
+import Breadcrumb from "@/components/Breadcrumb";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { getProducts } from "@/lib/sanity.queries";
@@ -9,12 +10,17 @@ export default async function ProductsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50">
-
+      {/* Breadcrumb */}
+      <Breadcrumb 
+        items={[
+          { label: "Products" }
+        ]} 
+      />
 
       {/* Page Header */}
-      <section className="py-16 px-4">
+      <section className="py-12 sm:py-16 lg:py-20 px-4">
         <div className="container mx-auto text-center">
-          <h2 className="text-4xl font-bold text-amber-900 mb-6">
+          <h2 className="text-3xl sm:text-4xl font-bold text-amber-900 mb-6">
             Our Products
           </h2>
           <p className="text-xl text-amber-700 mb-8 max-w-2xl mx-auto">
@@ -27,7 +33,7 @@ export default async function ProductsPage() {
       </section>
 
       {/* Products Grid */}
-      <section className="py-16 px-4 bg-white/50">
+      <section className="py-12 sm:py-16 lg:py-20 px-4 bg-white/50">
         <div className="container mx-auto">
           {products.length > 0 ? (
             <ProductGrid products={products} categories={categories} />
@@ -47,7 +53,7 @@ export default async function ProductsPage() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 px-4">
+      <section className="py-12 sm:py-16 lg:py-20 px-4">
         <div className="container mx-auto text-center">
           <h3 className="text-3xl font-bold text-amber-900 mb-4">
             Don&apos;t See What You&apos;re Looking For?
@@ -56,7 +62,7 @@ export default async function ProductsPage() {
             We specialize in custom wooden art pieces. Contact us to discuss your vision,
             and we&apos;ll work together to create something truly unique.
           </p>
-          <div className="flex gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="bg-amber-600 hover:bg-amber-700">
               <Link href="/contact">Request Custom Piece</Link>
             </Button>

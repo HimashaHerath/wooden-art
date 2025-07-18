@@ -2,21 +2,21 @@ import Link from "next/link";
 
 export default function AboutPage() {
   const aboutContent = {
-    title: "About Our Wooden Art",
+    title: "About Wooden Art Gallery",
     content: `
-      Welcome to our world of handcrafted wooden art, where each piece tells a story of passion, skill, and dedication to the timeless craft of woodworking.
+      Welcome to Wooden Art Gallery, where traditional Sri Lankan craftsmanship meets contemporary design. We are a premier furniture and wooden art studio located in Sri Lanka, dedicated to creating exceptional handcrafted pieces that blend functionality with artistic beauty.
 
       ## Our Story
 
-      Founded with a deep love for woodworking and a commitment to creating beautiful, functional pieces, our workshop has been bringing natural beauty into homes for over a decade. What started as a hobby has grown into a full-time passion for creating unique wooden art pieces that stand the test of time.
+      Wooden Art Gallery was founded with a vision to preserve and celebrate the rich tradition of Sri Lankan woodworking while adapting to modern design sensibilities. Our journey began as a small family workshop and has grown into a respected name in custom furniture and decorative wooden art. We take pride in supporting local artisans and maintaining the highest standards of craftsmanship.
 
       ## Our Craft
 
-      Every piece in our collection is carefully handcrafted using traditional techniques combined with modern precision. We believe that the natural beauty of wood should be celebrated and enhanced, not masked. Our skilled artisans work with various hardwoods, each selected for its unique grain patterns, durability, and character.
+      Each piece in our collection is meticulously handcrafted by skilled Sri Lankan artisans who have inherited generations of woodworking knowledge. We work with premium local and imported hardwoods, carefully selecting each piece for its unique grain patterns, durability, and natural beauty. Our techniques combine time-honored traditional methods with modern precision tools to create furniture and art pieces that are both functional and aesthetically stunning.
 
-      ## Our Promise
+      ## Our Commitment
 
-      When you choose one of our pieces, you're not just buying furniture or decor – you're investing in a piece of art that will bring warmth and natural beauty to your space for generations to come. Each item is made with meticulous attention to detail and finished with care to ensure lasting quality.
+      At Wooden Art Gallery, we believe in creating pieces that tell a story. Whether it's a custom dining table for your family gatherings or a decorative sculpture for your living space, each item is crafted with attention to detail and finished to last for generations. We are committed to sustainable practices, quality craftsmanship, and customer satisfaction.
     `
   };
 
@@ -25,7 +25,7 @@ export default function AboutPage() {
 
 
       {/* Breadcrumb */}
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto px-4 py-4 sm:py-6">
         <nav className="text-sm text-amber-600">
           <Link href="/" className="hover:text-amber-800">Home</Link>
           <span className="mx-2">›</span>
@@ -34,58 +34,60 @@ export default function AboutPage() {
       </div>
 
       {/* About Content */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-lg p-8 mb-8">
-            <h1 className="text-4xl font-bold text-amber-900 mb-6">{aboutContent.title}</h1>
+      <section className="py-12 sm:py-16 lg:py-20 px-4">
+        <div className="container mx-auto">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-lg p-6 sm:p-8 mb-8">
+              <h1 className="text-3xl sm:text-4xl font-bold text-amber-900 mb-6">{aboutContent.title}</h1>
             
             <div className="prose prose-amber prose-lg max-w-none text-amber-800 leading-relaxed">
               <p className="mb-6 text-lg">
-                Welcome to our world of handcrafted wooden art, where each piece tells a story of passion, skill, and dedication to the timeless craft of woodworking.
+                Welcome to Wooden Art Gallery, where traditional Sri Lankan craftsmanship meets contemporary design. We are a premier furniture and wooden art studio located in Sri Lanka, dedicated to creating exceptional handcrafted pieces that blend functionality with artistic beauty.
               </p>
               
               <h2 className="text-2xl font-semibold text-amber-900 mt-8 mb-4">Our Story</h2>
               <p className="mb-4 text-amber-800">
-                Founded with a deep love for woodworking and a commitment to creating beautiful, functional pieces, our workshop has been bringing natural beauty into homes for over a decade. What started as a hobby has grown into a full-time passion for creating unique wooden art pieces that stand the test of time.
+                Wooden Art Gallery was founded with a vision to preserve and celebrate the rich tradition of Sri Lankan woodworking while adapting to modern design sensibilities. Our journey began as a small family workshop and has grown into a respected name in custom furniture and decorative wooden art. We take pride in supporting local artisans and maintaining the highest standards of craftsmanship.
               </p>
               
               <h2 className="text-2xl font-semibold text-amber-900 mt-8 mb-4">Our Craft</h2>
               <p className="mb-4 text-amber-800">
-                Every piece in our collection is carefully handcrafted using traditional techniques combined with modern precision. We believe that the natural beauty of wood should be celebrated and enhanced, not masked. Our skilled artisans work with various hardwoods, each selected for its unique grain patterns, durability, and character.
+                Each piece in our collection is meticulously handcrafted by skilled Sri Lankan artisans who have inherited generations of woodworking knowledge. We work with premium local and imported hardwoods, carefully selecting each piece for its unique grain patterns, durability, and natural beauty. Our techniques combine time-honored traditional methods with modern precision tools to create furniture and art pieces that are both functional and aesthetically stunning.
               </p>
               
-              <h2 className="text-2xl font-semibold text-amber-900 mt-8 mb-4">Our Promise</h2>
+              <h2 className="text-2xl font-semibold text-amber-900 mt-8 mb-4">Our Commitment</h2>
               <p className="mb-4 text-amber-800">
-                When you choose one of our pieces, you&apos;re not just buying furniture or decor – you&apos;re investing in a piece of art that will bring warmth and natural beauty to your space for generations to come. Each item is made with meticulous attention to detail and finished with care to ensure lasting quality.
+                At Wooden Art Gallery, we believe in creating pieces that tell a story. Whether it&apos;s a custom dining table for your family gatherings or a decorative sculpture for your living space, each item is crafted with attention to detail and finished to last for generations. We are committed to sustainable practices, quality craftsmanship, and customer satisfaction.
               </p>
             </div>
           </div>
 
           {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             <div className="bg-white/60 rounded-lg p-6 text-center">
-              <div className="text-4xl mb-4">🌲</div>
-              <h3 className="text-lg font-semibold text-amber-900 mb-2">Premium Materials</h3>
-              <p className="text-amber-700 text-sm">Sustainably sourced hardwoods</p>
+              <div className="text-4xl mb-4">🇱🇰</div>
+              <h3 className="text-lg font-semibold text-amber-900 mb-2">Sri Lankan Heritage</h3>
+              <p className="text-amber-700 text-sm">Traditional craftsmanship with modern design</p>
             </div>
             <div className="bg-white/60 rounded-lg p-6 text-center">
-              <div className="text-4xl mb-4">🔨</div>
-              <h3 className="text-lg font-semibold text-amber-900 mb-2">Expert Craftsmanship</h3>
-              <p className="text-amber-700 text-sm">Traditional techniques, modern precision</p>
+              <div className="text-4xl mb-4">🏠</div>
+              <h3 className="text-lg font-semibold text-amber-900 mb-2">Custom Furniture</h3>
+              <p className="text-amber-700 text-sm">Bespoke pieces tailored to your space</p>
             </div>
             <div className="bg-white/60 rounded-lg p-6 text-center">
-              <div className="text-4xl mb-4">♻️</div>
-              <h3 className="text-lg font-semibold text-amber-900 mb-2">Sustainable</h3>
-              <p className="text-amber-700 text-sm">Environmentally responsible practices</p>
+              <div className="text-4xl mb-4">👥</div>
+              <h3 className="text-lg font-semibold text-amber-900 mb-2">Local Artisans</h3>
+              <p className="text-amber-700 text-sm">Supporting skilled craftspeople</p>
             </div>
             <div className="bg-white/60 rounded-lg p-6 text-center">
-              <div className="text-4xl mb-4">⭐</div>
-              <h3 className="text-lg font-semibold text-amber-900 mb-2">Unique Pieces</h3>
-              <p className="text-amber-700 text-sm">Every item is one-of-a-kind</p>
+              <div className="text-4xl mb-4">🎨</div>
+              <h3 className="text-lg font-semibold text-amber-900 mb-2">Art & Function</h3>
+              <p className="text-amber-700 text-sm">Beautiful pieces that serve a purpose</p>
             </div>
           </div>
+          </div>
         </div>
-      </div>
+      </section>
 
 
     </div>

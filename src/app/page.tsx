@@ -4,12 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { ArrowRight, Sparkles, Award, Leaf } from "lucide-react";
-import { getProducts, getFeaturedProducts } from "@/lib/sanity.queries";
+import { getFeaturedProducts } from "@/lib/sanity.queries";
 
 export default async function Home() {
-  const products = await getProducts();
   const featuredProducts = await getFeaturedProducts();
-  const categories = Array.from(new Set(products.map(product => product.category)));
   
   return (
     <div className="min-h-screen">
@@ -18,7 +16,7 @@ export default async function Home() {
 
       {/* Featured Products */}
       {featuredProducts.length > 0 && (
-        <section className="py-20 px-4 bg-white/50">
+        <section className="py-12 sm:py-16 lg:py-20 px-4 bg-white/50">
           <div className="container mx-auto">
             <div className="text-center mb-16">
               <Badge className="bg-amber-100 text-amber-800 mb-4">
@@ -52,63 +50,16 @@ export default async function Home() {
         </section>
       )}
 
-      {/* Categories Section */}
-      {categories.length > 0 && (
-        <section className="py-20 px-4 bg-gradient-to-br from-amber-50 to-orange-50">
-          <div className="container mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-amber-900 mb-6">
-                Shop by Category
-              </h2>
-              <p className="text-xl text-amber-700 max-w-2xl mx-auto">
-                From functional pieces to decorative art, find exactly what you&apos;re looking for.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-              {categories.map((category) => {
-                const categoryProducts = products.filter(p => p.category === category);
-                const count = categoryProducts.length;
-                
-                return (
-                  <Link 
-                    key={category}
-                    href={`/products?category=${encodeURIComponent(category)}`}
-                    className="group"
-                  >
-                    <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-amber-100">
-                      <div className="text-3xl mb-3">
-                        {category === 'Sculptures' && '🗿'}
-                        {category === 'Furniture' && '🪑'}
-                        {category === 'Decorative' && '🎨'}
-                        {category === 'Functional' && '🥄'}
-                        {category === 'Art Pieces' && '🖼️'}
-                        {category === 'Custom' && '⚒️'}
-                      </div>
-                      <h3 className="font-semibold text-amber-900 group-hover:text-amber-700 transition-colors">
-                        {category}
-                      </h3>
-                      <p className="text-sm text-amber-600 mt-1">
-                        {count} item{count !== 1 ? 's' : ''}
-                      </p>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Why Choose Us */}
-      <section className="py-20 px-4 bg-white">
+      <section className="py-12 sm:py-16 lg:py-20 px-4 bg-white">
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-amber-900 mb-6">
-              Why Choose Our Wooden Art?
+              Why Choose Wooden Art Gallery?
             </h2>
             <p className="text-xl text-amber-700 max-w-2xl mx-auto">
-              Every piece tells a story of dedication, skill, and love for the craft.
+              Sri Lankan craftsmanship meets modern design in every piece we create.
             </p>
           </div>
           
@@ -117,9 +68,9 @@ export default async function Home() {
               <div className="bg-amber-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
                 <Award className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-amber-900 mb-4">Master Craftsmanship</h3>
+              <h3 className="text-xl font-bold text-amber-900 mb-4">Sri Lankan Heritage</h3>
               <p className="text-amber-700">
-                Over 10 years of experience creating exceptional wooden pieces with traditional techniques.
+                Traditional Sri Lankan woodworking techniques passed down through generations, combined with contemporary design.
               </p>
             </div>
             
@@ -127,9 +78,9 @@ export default async function Home() {
               <div className="bg-green-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
                 <Leaf className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-amber-900 mb-4">Sustainable Materials</h3>
+              <h3 className="text-xl font-bold text-amber-900 mb-4">Premium Materials</h3>
               <p className="text-amber-700">
-                We source our wood from responsibly managed forests, ensuring environmental stewardship.
+                We use the finest local and imported hardwoods, each selected for its unique grain patterns and durability.
               </p>
             </div>
             
@@ -137,9 +88,9 @@ export default async function Home() {
               <div className="bg-amber-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
                 <Sparkles className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-amber-900 mb-4">Unique Designs</h3>
+              <h3 className="text-xl font-bold text-amber-900 mb-4">Custom Creations</h3>
               <p className="text-amber-700">
-                Each piece is one-of-a-kind, showcasing the natural beauty and character of the wood.
+                From furniture to decorative art, we create bespoke pieces tailored to your vision and space.
               </p>
             </div>
           </div>
@@ -147,14 +98,14 @@ export default async function Home() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 px-4 bg-gradient-to-r from-amber-600 to-orange-600 text-white">
+      <section className="py-12 sm:py-16 lg:py-20 px-4 bg-gradient-to-r from-amber-600 to-orange-600 text-white">
         <div className="container mx-auto text-center">
           <h2 className="text-4xl font-bold mb-6">
-            Ready to Bring Natural Beauty to Your Home?
+            Transform Your Space with Sri Lankan Craftsmanship
           </h2>
           <p className="text-xl text-amber-100 mb-8 max-w-2xl mx-auto">
-            Explore our collection of handcrafted wooden art pieces or commission a custom piece 
-            that&apos;s perfect for your space.
+            Discover our collection of handcrafted furniture and wooden art, or commission a custom piece 
+            designed specifically for your home or office.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" variant="secondary" className="bg-white text-amber-600 hover:bg-amber-50">
@@ -163,7 +114,7 @@ export default async function Home() {
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-amber-600">
+            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white text-amber-600">
               <Link href="/contact">
                 Request Custom Piece
               </Link>

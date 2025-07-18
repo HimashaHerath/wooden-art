@@ -34,8 +34,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       />
 
       {/* Product Details */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <section className="py-12 sm:py-16 lg:py-20 px-4">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Images */}
           <div className="space-y-4">
             <div className="relative h-96 lg:h-[500px] overflow-hidden rounded-lg">
@@ -79,9 +80,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           {/* Product Info */}
           <div className="space-y-6">
             <div>
-              <h1 className="text-4xl font-bold text-amber-900 mb-2">{product.name}</h1>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-amber-900 mb-2">{product.name}</h1>
               <div className="flex items-center gap-4 mb-4">
-                <span className="text-3xl font-bold text-amber-600">{`$${product.price}`}</span>
+                <span className="text-2xl sm:text-3xl font-bold text-amber-600">{`LKR ${product.price.toLocaleString()}`}</span>
                 <Badge variant="outline" className="text-amber-700 border-amber-300">
                   {product.category}
                 </Badge>
@@ -131,32 +132,24 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               </TabsContent>
             </Tabs>
 
-            {/* Actions */}
+            {/* Contact Information */}
             <div className="space-y-4">
-              {product.available ? (
-                <div className="space-y-3">
-                  <Button size="lg" className="w-full bg-amber-600 hover:bg-amber-700">
-                    Contact for Purchase
-                  </Button>
-                  <Button variant="outline" size="lg" className="w-full border-amber-300 text-amber-700">
-                    Ask a Question
-                  </Button>
+              <div className="bg-amber-50 rounded-lg p-4 border border-amber-200">
+                <h3 className="font-semibold text-amber-900 mb-3">Interested in this piece?</h3>
+                <div className="space-y-2 text-sm text-amber-700">
+                  <p>📞 <a href="tel:+94112345678" className="hover:text-amber-900">+94 11 234 5678</a></p>
+                  <p>✉️ <a href="mailto:info@woodenartgallery.lk" className="hover:text-amber-900">info@woodenartgallery.lk</a></p>
+                  <p>🚚 Delivery available across Sri Lanka</p>
+                  {!product.available && (
+                    <p className="text-amber-600 font-medium">⚠️ Currently Unavailable</p>
+                  )}
                 </div>
-              ) : (
-                <Button disabled size="lg" className="w-full">
-                  Currently Unavailable
-                </Button>
-              )}
-              
-              <div className="text-sm text-amber-600">
-                <p>🚚 Free shipping within the continental US</p>
-                <p>📞 Questions? Call us at (555) 123-4567</p>
-                <p>✉️ Email us at info@woodenart.com</p>
               </div>
             </div>
           </div>
+          </div>
         </div>
-      </div>
+      </section>
 
 
     </div>

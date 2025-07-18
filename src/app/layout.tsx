@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "🌳 Wooden Art - Handcrafted Wood Pieces",
-  description: "Discover unique, handcrafted wooden pieces that bring warmth and natural beauty to your home. Each item is carefully crafted with attention to detail and quality.",
+  title: "🌳 Wooden Art Gallery - Sri Lankan Craftsmanship",
+  description: "Experience the finest Sri Lankan craftsmanship in handcrafted furniture and wooden art. We blend traditional techniques with contemporary design for your home.",
 };
 
 export default function RootLayout({

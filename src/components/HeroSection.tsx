@@ -5,7 +5,7 @@ import { ArrowRight, Star, Leaf, Award } from "lucide-react";
 
 export default function HeroSection() {
   return (
-    <section className="relative py-24 px-4 overflow-hidden">
+    <section className="relative py-16 sm:py-20 lg:py-24 px-4 overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100/50" />
       <div className="absolute inset-0 opacity-40" style={{
@@ -31,16 +31,16 @@ export default function HeroSection() {
             {/* Heading */}
             <div className="space-y-4">
               <h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold text-amber-900 leading-tight">
-                Beautiful
+                Sri Lankan
                 <span className="block text-amber-700">Wooden Art</span>
                 <span className="block text-amber-600 text-3xl lg:text-4xl xl:text-5xl font-medium">
-                  for Your Home
+                  Gallery
                 </span>
               </h1>
               
               <p className="text-xl lg:text-2xl text-amber-700/80 leading-relaxed max-w-xl">
-                Discover unique, handcrafted wooden pieces that bring warmth and natural beauty to your space. 
-                Each item tells a story of skilled craftsmanship and natural artistry.
+                Experience the finest Sri Lankan craftsmanship in every piece. Our handcrafted furniture and wooden art 
+                blend traditional techniques with contemporary design for your home.
               </p>
             </div>
 
@@ -118,8 +118,8 @@ export default function HeroSection() {
                 
                 <div className="absolute bottom-4 left-4 bg-white/80 backdrop-blur-sm rounded-lg p-3 shadow-lg">
                   <div className="text-xs text-amber-600 font-medium">Featured Piece</div>
-                  <div className="text-sm font-bold text-amber-900">Handcrafted Oak Bowl</div>
-                  <div className="text-lg font-bold text-amber-600">$85</div>
+                  <div className="text-sm font-bold text-amber-900">Teak Wood Sculpture</div>
+                  <div className="text-lg font-bold text-amber-600">LKR 12,500</div>
                 </div>
               </div>
               

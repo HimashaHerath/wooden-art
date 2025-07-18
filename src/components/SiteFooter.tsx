@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BUSINESS_INFO } from "@/lib/business-info";
 
 export default function SiteFooter() {
   return (
@@ -6,9 +7,9 @@ export default function SiteFooter() {
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h4 className="text-2xl font-bold mb-4">🌳 Wooden Art</h4>
+            <h4 className="text-2xl font-bold mb-4">🌳 {BUSINESS_INFO.name}</h4>
             <p className="text-amber-100">
-              Handcrafted wooden pieces made with passion and precision. Each item tells a story of natural beauty and skilled craftsmanship.
+              {BUSINESS_INFO.description}
             </p>
           </div>
           <div>
@@ -23,14 +24,14 @@ export default function SiteFooter() {
           <div>
             <h5 className="text-lg font-semibold mb-4">Contact Info</h5>
             <div className="text-amber-100 space-y-2">
-              <p>📧 info@woodenart.com</p>
-              <p>📞 (555) 123-4567</p>
-              <p>📍 123 Craftsman Lane, Woodville</p>
+              <p>📧 {BUSINESS_INFO.contact.email}</p>
+              <p>📞 {BUSINESS_INFO.contact.phone}</p>
+              <p>📍 {BUSINESS_INFO.contact.address.fullAddress}</p>
             </div>
           </div>
         </div>
         <div className="border-t border-amber-700 mt-8 pt-8 text-center text-amber-100">
-          <p>&copy; 2024 Wooden Art. All rights reserved.</p>
+          <p>&copy; 2024 {BUSINESS_INFO.name}. All rights reserved.</p>
         </div>
       </div>
     </footer>

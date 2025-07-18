@@ -4,11 +4,11 @@ import Link from "next/link";
 
 export default function ContactPage() {
   const contactContent = {
-    title: "Contact Us",
-    email: "info@woodenart.com",
-    phone: "(555) 123-4567",
-    address: "123 Craftsman Lane\nWoodville, WA 98001\nUnited States",
-    content: "We'd love to hear from you! Whether you have questions about our existing pieces, want to commission a custom creation, or simply want to learn more about our craft, don't hesitate to reach out."
+    title: "Contact Wooden Art Gallery",
+    email: "info@woodenartgallery.lk", // Replace with actual email
+    phone: "+94 11 234 5678", // Replace with actual phone number
+    address: "Your Business Address\nColombo, Sri Lanka", // Replace with actual address
+    content: "We'd love to hear from you! Whether you're interested in our handcrafted furniture, looking to commission a custom piece, or have questions about our Sri Lankan wooden art collection, we're here to help."
   };
 
   return (
@@ -16,7 +16,7 @@ export default function ContactPage() {
 
 
       {/* Breadcrumb */}
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto px-4 py-4 sm:py-6">
         <nav className="text-sm text-amber-600">
           <Link href="/" className="hover:text-amber-800">Home</Link>
           <span className="mx-2">›</span>
@@ -25,15 +25,16 @@ export default function ContactPage() {
       </div>
 
       {/* Contact Content */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="max-w-6xl mx-auto">
-          <h1 className="text-4xl font-bold text-amber-900 mb-12 text-center">{contactContent.title}</h1>
+      <section className="py-12 sm:py-16 lg:py-20 px-4">
+        <div className="container mx-auto">
+          <div className="max-w-6xl mx-auto">
+            <h1 className="text-3xl sm:text-4xl font-bold text-amber-900 mb-8 sm:mb-12 text-center">{contactContent.title}</h1>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Contact Information */}
             <div className="space-y-6">
-              <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-lg p-8">
-                <h2 className="text-2xl font-semibold text-amber-900 mb-6">Get in Touch</h2>
+              <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-lg p-6 sm:p-8">
+                <h2 className="text-xl sm:text-2xl font-semibold text-amber-900 mb-6">Get in Touch</h2>
                 
                 <div className="prose prose-amber max-w-none mb-8 text-amber-800 leading-relaxed">
                   <p className="mb-4 text-amber-800">
@@ -88,15 +89,15 @@ export default function ContactPage() {
                   <div className="space-y-2 text-amber-700">
                     <div className="flex justify-between">
                       <span>Monday - Friday</span>
-                      <span>9:00 AM - 6:00 PM</span>
+                      <span>9:00 AM - 5:00 PM</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Saturday</span>
-                      <span>10:00 AM - 4:00 PM</span>
+                      <span>9:00 AM - 3:00 PM</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Sunday</span>
-                      <span>By appointment only</span>
+                      <span>Closed</span>
                     </div>
                   </div>
                 </CardContent>
@@ -111,11 +112,11 @@ export default function ContactPage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-amber-700 mb-4">
-                    Interested in a custom piece? We love working with customers to create unique, personalized wooden art.
+                    Looking for custom furniture or decorative pieces? We specialize in creating bespoke wooden art tailored to your specific needs and space.
                   </p>
-                  <Button className="w-full bg-amber-600 hover:bg-amber-700">
-                    Discuss Custom Project
-                  </Button>
+                  <p className="text-amber-600 text-sm">
+                    Contact us via phone or email to discuss your custom project ideas.
+                  </p>
                 </CardContent>
               </Card>
 
@@ -128,11 +129,11 @@ export default function ContactPage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-amber-700 mb-4">
-                    All our pieces come with detailed care instructions. For general questions about maintaining your wooden art, feel free to reach out.
+                    All Wooden Art Gallery pieces come with detailed care instructions. For questions about maintaining your furniture or wooden art, contact us.
                   </p>
-                  <Button variant="outline" className="w-full border-amber-300 text-amber-700">
-                    Care Questions
-                  </Button>
+                  <p className="text-amber-600 text-sm">
+                    Reach out via phone or email for care and maintenance guidance.
+                  </p>
                 </CardContent>
               </Card>
             </div>
@@ -146,18 +147,19 @@ export default function ContactPage() {
                 Whether you&apos;re interested in our existing pieces or want to commission something custom,
                 we&apos;re here to help bring your vision to life.
               </p>
-              <div className="flex gap-4 justify-center">
-                <Button variant="secondary" size="lg">
-                  View Our Products
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button asChild variant="secondary" size="lg">
+                  <Link href="/products">View Our Products</Link>
                 </Button>
-                <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-amber-600">
-                  Schedule Consultation
+                <Button asChild variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-amber-600">
+                  <Link href="/about">Learn About Us</Link>
                 </Button>
               </div>
             </div>
           </div>
+          </div>
         </div>
-      </div>
+      </section>
 
 
     </div>
