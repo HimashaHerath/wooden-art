@@ -114,7 +114,7 @@ export default async function Home() {
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white text-amber-600">
+            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-amber-600">
               <Link href="/contact">
                 Request Custom Piece
               </Link>

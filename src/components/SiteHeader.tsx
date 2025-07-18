@@ -1,12 +1,12 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/ui/dialog";
 import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Separator } from "@radix-ui/react-separator";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -17,6 +17,7 @@ const navigation = [
 
 export default function SiteHeader() {
   const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <header className="bg-white/95 backdrop-blur-sm border-b border-amber-200/60 sticky top-0 z-50 shadow-sm">
@@ -68,14 +69,14 @@ export default function SiteHeader() {
 
           {/* Mobile Menu */}
           <div className="md:hidden">
-            <Dialog>
+            <Dialog open={isMenuOpen} onOpenChange={setIsMenuOpen}>
               <DialogTrigger asChild>
                 <Button variant="ghost" size="icon" className="text-amber-700">
                   <Menu className="h-5 w-5" />
                   <span className="sr-only">Open menu</span>
                 </Button>
               </DialogTrigger>
-              <DialogContent className="p-0 w-full max-w-sm">
+              <DialogContent className="p-0 w-full max-w-full sm:max-w-sm top-0 translate-y-0 data-[state=open]:slide-in-from-top-0 data-[state=closed]:slide-out-to-top-0">
                 <DialogTitle className="sr-only">Navigation Menu</DialogTitle>
                 <div className="p-6">
                   {/* Mobile Logo */}
@@ -89,7 +90,7 @@ export default function SiteHeader() {
                     </div>
                   </div>
                   
-                  <Separator className="mb-6" />
+                  <div className="border-t border-gray-200 my-6" />
                   
                   {/* Mobile Navigation */}
                   <nav className="space-y-4">
@@ -101,6 +102,7 @@ export default function SiteHeader() {
                         <Link
                           key={item.name}
                           href={item.href}
+                          onClick={() => setIsMenuOpen(false)}
                           className={cn(
                             "block py-2 px-3 rounded-lg font-medium transition-colors",
                             isActive
