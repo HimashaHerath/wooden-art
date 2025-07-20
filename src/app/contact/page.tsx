@@ -26,7 +26,7 @@ export default function ContactPage() {
               Contact Us
             </h1>
             <p className="font-sans text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-              We'd love to hear from you about custom orders, inquiries, or visits to our workshop
+              We&apos;d love to hear from you about custom orders, inquiries, or visits to our workshop
             </p>
           </div>
 
@@ -101,7 +101,7 @@ export default function ContactPage() {
             <h2 className="font-serif text-xl text-foreground mb-6">Care & Maintenance</h2>
             <div className="font-sans text-base text-muted-foreground leading-relaxed space-y-4">
               <p>
-                All Wooden Art Gallery pieces come with detailed care instructions. For questions about maintaining your furniture or wooden art, we're here to help.
+                All Wooden Art Gallery pieces come with detailed care instructions. For questions about maintaining your furniture or wooden art, we&apos;re here to help.
               </p>
               <p>
                 Reach out via phone or email for care and maintenance guidance specific to your piece.

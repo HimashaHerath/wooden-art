@@ -65,6 +65,7 @@ function processProductImages(product: Product): ProductWithImageUrls {
 const fallbackProducts: ProductWithImageUrls[] = [
   {
     _id: 'fallback-1',
+    _type: 'product',
     name: 'Handcrafted Wooden Bowl',
     slug: { current: 'handcrafted-wooden-bowl' },
     description: 'Beautiful handcrafted wooden bowl made from premium Sri Lankan wood.',
@@ -80,6 +81,7 @@ const fallbackProducts: ProductWithImageUrls[] = [
   },
   {
     _id: 'fallback-2',
+    _type: 'product',
     name: 'Decorative Wall Art',
     slug: { current: 'decorative-wall-art' },
     description: 'Intricate wooden wall art piece showcasing traditional Sri Lankan craftsmanship.',

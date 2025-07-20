@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       'wooden furniture',
       'art gallery',
       'custom furniture'
-    ].filter(Boolean),
+    ].filter(Boolean) as string[],
     openGraph: {
       title,
       description,

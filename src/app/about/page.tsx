@@ -61,7 +61,7 @@ export default function AboutPage() {
             <h2 className="font-serif text-xl text-foreground mb-6">Our Commitment</h2>
             <div className="font-sans text-base text-muted-foreground leading-relaxed space-y-4">
               <p>
-                At Wooden Art Gallery, we believe in creating pieces that tell a story. Whether it's a custom dining table for your family gatherings or a decorative sculpture for your living space, each item is crafted with attention to detail and finished to last for generations.
+                At Wooden Art Gallery, we believe in creating pieces that tell a story. Whether it&apos;s a custom dining table for your family gatherings or a decorative sculpture for your living space, each item is crafted with attention to detail and finished to last for generations.
               </p>
               <p>
                 We are committed to sustainable practices, quality craftsmanship, and customer satisfaction.

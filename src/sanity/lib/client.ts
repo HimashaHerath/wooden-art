@@ -27,7 +27,7 @@ export const client = createClient({
 })
 
 // Sanity fetch with caching and error handling
-export const sanityFetch = async <T>(query: string, params: Record<string, any> = {}, options: { 
+export const sanityFetch = async <T>(query: string, params: Record<string, unknown> = {}, options: { 
   revalidate?: number | false
   tags?: string[]
 } = {}): Promise<T> => {

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -19,19 +19,19 @@ export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
   const validImages = images.filter(Boolean);
   const totalSlides = validImages.length;
 
-  const goToPrevious = () => {
+  const goToPrevious = useCallback(() => {
     setCurrentIndex((prevIndex) => 
       prevIndex === 0 ? totalSlides - 1 : prevIndex - 1
     );
     setIsImageLoading(true);
-  };
+  }, [totalSlides]);
 
-  const goToNext = () => {
+  const goToNext = useCallback(() => {
     setCurrentIndex((prevIndex) => 
       prevIndex === totalSlides - 1 ? 0 : prevIndex + 1
     );
     setIsImageLoading(true);
-  };
+  }, [totalSlides]);
 
   const goToSlide = (index: number) => {
     setCurrentIndex(index);
@@ -50,7 +50,7 @@ export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [goToPrevious, goToNext]);
 
   if (totalSlides === 0) {
     return (
