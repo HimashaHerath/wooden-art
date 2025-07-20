@@ -1,37 +1,35 @@
 import Link from "next/link";
-import { BUSINESS_INFO } from "@/lib/business-info";
 
 export default function SiteFooter() {
   return (
-    <footer className="bg-amber-800 text-white py-12 px-4">
-      <div className="container mx-auto">
+    <footer className="bg-background border-t border-border py-12">
+      <div className="gutter-mobile md:gutter-desktop">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h4 className="text-2xl font-bold mb-4">🌳 {BUSINESS_INFO.name}</h4>
-            <p className="text-amber-100">
-              {BUSINESS_INFO.description}
+            <h4 className="font-serif text-xl text-foreground mb-4">Wooden Art Gallery</h4>
+            <p className="font-sans text-sm text-muted-foreground leading-relaxed">
+              Handcrafted furniture and wooden art celebrating Sri Lankan craftsmanship with contemporary design sensibilities.
             </p>
           </div>
           <div>
-            <h5 className="text-lg font-semibold mb-4">Quick Links</h5>
-            <ul className="space-y-2 text-amber-100">
-              <li><Link href="/" className="hover:text-white">Home</Link></li>
-              <li><Link href="/products" className="hover:text-white">Products</Link></li>
-              <li><Link href="/about" className="hover:text-white">About</Link></li>
-              <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
+            <h5 className="font-sans text-sm font-medium text-foreground mb-4">Quick Links</h5>
+            <ul className="space-y-2 font-sans text-sm">
+              <li><Link href="/" className="text-muted-foreground hover:text-accent transition-polene">Products</Link></li>
+              <li><Link href="/about" className="text-muted-foreground hover:text-accent transition-polene">About</Link></li>
+              <li><Link href="/contact" className="text-muted-foreground hover:text-accent transition-polene">Contact</Link></li>
             </ul>
           </div>
           <div>
-            <h5 className="text-lg font-semibold mb-4">Contact Info</h5>
-            <div className="text-amber-100 space-y-2">
-              <p>📧 {BUSINESS_INFO.contact.email}</p>
-              <p>📞 {BUSINESS_INFO.contact.phone}</p>
-              <p>📍 {BUSINESS_INFO.contact.address.fullAddress}</p>
+            <h5 className="font-sans text-sm font-medium text-foreground mb-4">Contact Info</h5>
+            <div className="font-sans text-sm text-muted-foreground space-y-2">
+              <p>info@woodenartgallery.lk</p>
+              <p>+94 11 234 5678</p>
+              <p>Colombo, Sri Lanka</p>
             </div>
           </div>
         </div>
-        <div className="border-t border-amber-700 mt-8 pt-8 text-center text-amber-100">
-          <p>&copy; 2024 {BUSINESS_INFO.name}. All rights reserved.</p>
+        <div className="border-t border-border mt-8 pt-8 text-center">
+          <p className="font-sans text-xs text-muted-foreground">&copy; 2024 Wooden Art Gallery. All rights reserved.</p>
         </div>
       </div>
     </footer>

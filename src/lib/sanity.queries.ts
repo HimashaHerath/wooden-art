@@ -1,5 +1,5 @@
 import { groq } from 'next-sanity'
-import { client } from '@/sanity/lib/client'
+import { sanityFetch } from '@/sanity/lib/client'
 import { urlFor } from '@/sanity/lib/image'
 import { Product, ProductWithImageUrls } from './sanity.types'
 
@@ -61,34 +61,80 @@ function processProductImages(product: Product): ProductWithImageUrls {
   }
 }
 
+// Fallback data for when Sanity is unavailable
+const fallbackProducts: ProductWithImageUrls[] = [
+  {
+    _id: 'fallback-1',
+    name: 'Handcrafted Wooden Bowl',
+    slug: { current: 'handcrafted-wooden-bowl' },
+    description: 'Beautiful handcrafted wooden bowl made from premium Sri Lankan wood.',
+    price: 45,
+    category: 'functional',
+    featured_image: '/placeholder-image.jpg',
+    gallery: [],
+    dimensions: '8" diameter x 3" height',
+    material: 'Teak wood',
+    available: true,
+    featured: true,
+    status: 'in-stock'
+  },
+  {
+    _id: 'fallback-2',
+    name: 'Decorative Wall Art',
+    slug: { current: 'decorative-wall-art' },
+    description: 'Intricate wooden wall art piece showcasing traditional Sri Lankan craftsmanship.',
+    price: 120,
+    category: 'decorative',
+    featured_image: '/placeholder-image.jpg',
+    gallery: [],
+    dimensions: '24" x 16" x 2"',
+    material: 'Mahogany',
+    available: true,
+    featured: false,
+    status: 'in-stock'
+  }
+]
+
 // API functions
 export async function getProducts(): Promise<ProductWithImageUrls[]> {
   try {
-    const products = await client.fetch<Product[]>(productsQuery)
+    const products = await sanityFetch<Product[]>(productsQuery, {}, { 
+      revalidate: 300, // 5 minutes
+      tags: ['products'] 
+    })
     return products.map(processProductImages)
   } catch (error) {
     console.error('Error fetching products:', error)
-    return []
+    return fallbackProducts
   }
 }
 
 export async function getProductBySlug(slug: string): Promise<ProductWithImageUrls | null> {
   try {
-    const product = await client.fetch<Product>(productBySlugQuery, { slug })
+    const product = await sanityFetch<Product>(productBySlugQuery, { slug }, {
+      revalidate: 300, // 5 minutes
+      tags: ['products', `product-${slug}`]
+    })
     return product ? processProductImages(product) : null
   } catch (error) {
     console.error('Error fetching product:', error)
-    return null
+    // Check fallback data for the slug
+    const fallbackProduct = fallbackProducts.find(p => p.slug.current === slug)
+    return fallbackProduct || null
   }
 }
 
 export async function getProductSlugs(): Promise<string[]> {
   try {
-    const slugs = await client.fetch<{ slug: string }[]>(productSlugsQuery)
+    const slugs = await sanityFetch<{ slug: string }[]>(productSlugsQuery, {}, {
+      revalidate: 3600, // 1 hour
+      tags: ['products']
+    })
     return slugs.map(item => item.slug)
   } catch (error) {
     console.error('Error fetching product slugs:', error)
-    return []
+    // Return fallback slugs
+    return fallbackProducts.map(p => p.slug.current)
   }
 }
 
@@ -112,10 +158,14 @@ export async function getFeaturedProducts(): Promise<ProductWithImageUrls[]> {
         seo
       }
     `
-    const products = await client.fetch<Product[]>(featuredQuery)
+    const products = await sanityFetch<Product[]>(featuredQuery, {}, {
+      revalidate: 300, // 5 minutes
+      tags: ['products', 'featured']
+    })
     return products.map(processProductImages)
   } catch (error) {
     console.error('Error fetching featured products:', error)
-    return []
+    // Return featured products from fallback data
+    return fallbackProducts.filter(p => p.featured)
   }
 }

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@400&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -6,7 +7,10 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-playfair);
   --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -25,8 +29,6 @@
   --color-input: var(--input);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -41,75 +43,78 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  
+  /* Polène inspired spacing */
+  --spacing-gutter-desktop: 24px;
+  --spacing-gutter-mobile: 16px;
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --radius: 0.5rem;
+  
+  /* Polène Color Palette */
+  --background: #FAFAF8;
+  --foreground: #1E1E1E;
+  --accent: #8C6239;
+  --accent-foreground: #FAFAF8;
+  
+  /* Typography */
+  --font-playfair: 'Playfair Display', serif;
+  --font-inter: 'Inter', sans-serif;
+  
+  /* Semantic colors built on Polène palette */
+  --card: #FAFAF8;
+  --card-foreground: #1E1E1E;
+  --popover: #FFFFFF;
+  --popover-foreground: #1E1E1E;
+  --primary: #1E1E1E;
+  --primary-foreground: #FAFAF8;
+  --secondary: #F5F5F3;
+  --secondary-foreground: #1E1E1E;
+  --muted: #F5F5F3;
+  --muted-foreground: #6B7280;
+  --destructive: #DC2626;
+  --border: #E5E7EB;
+  --input: #F9FAFB;
+  --ring: #8C6239;
+  
+  /* Chart colors (keeping existing) */
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  
+  /* Sidebar (minimalist) */
+  --sidebar: #FAFAF8;
+  --sidebar-foreground: #1E1E1E;
+  --sidebar-primary: #8C6239;
+  --sidebar-primary-foreground: #FAFAF8;
+  --sidebar-accent: #F5F5F3;
+  --sidebar-accent-foreground: #1E1E1E;
+  --sidebar-border: #E5E7EB;
+  --sidebar-ring: #8C6239;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  /* Dark mode maintains Polène aesthetic but inverted */
+  --background: #1E1E1E;
+  --foreground: #FAFAF8;
+  --card: #2A2A2A;
+  --card-foreground: #FAFAF8;
+  --popover: #2A2A2A;
+  --popover-foreground: #FAFAF8;
+  --primary: #FAFAF8;
+  --primary-foreground: #1E1E1E;
+  --secondary: #3A3A3A;
+  --secondary-foreground: #FAFAF8;
+  --muted: #3A3A3A;
+  --muted-foreground: #9CA3AF;
+  --accent: #D4A574;
+  --accent-foreground: #1E1E1E;
+  --border: #374151;
+  --input: #374151;
+  --ring: #D4A574;
 }
 
 @layer base {
@@ -142,9 +147,60 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
   }
+  
+  /* Polène spacing utilities */
+  .gutter-desktop {
+    padding-left: var(--spacing-gutter-desktop);
+    padding-right: var(--spacing-gutter-desktop);
+  }
+  
+  .gutter-mobile {
+    padding-left: var(--spacing-gutter-mobile);
+    padding-right: var(--spacing-gutter-mobile);
+  }
+  
+  /* Responsive gutter - mobile first */
+  @media (min-width: 768px) {
+    .gutter-mobile {
+      padding-left: var(--spacing-gutter-desktop);
+      padding-right: var(--spacing-gutter-desktop);
+    }
+  }
+  
+  /* Typography utilities */
+  .font-serif {
+    font-family: var(--font-playfair);
+    font-weight: 500;
+  }
+  
+  .font-sans {
+    font-family: var(--font-inter);
+    font-weight: 400;
+  }
+  
+  /* Interaction states */
+  .transition-polene {
+    transition: all 150ms ease-out;
+  }
+  
+  /* Touch target minimum */
+  .touch-target {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  
+  /* Hide scrollbar */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
 
-/* Custom animations for better UX */
+/* Polène-inspired animations */
 @keyframes shimmer {
   0% {
     background-position: -200px 0;
@@ -154,10 +210,49 @@
   }
 }
 
+@keyframes zoom-in {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rotate-90 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(90deg);
+  }
+}
+
 .animate-shimmer {
   animation: shimmer 2s infinite;
-  background: linear-gradient(90deg, #f0f0f0 0px, #e0e0e0 40px, #f0f0f0 80px);
+  background: linear-gradient(90deg, var(--secondary) 0px, var(--muted) 40px, var(--secondary) 80px);
   background-size: 200px 100%;
+}
+
+.animate-zoom-in {
+  animation: zoom-in 150ms ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 150ms ease-out forwards;
+}
+
+.animate-rotate-90 {
+  animation: rotate-90 150ms ease-out forwards;
 }
 
 /* Smooth scrolling */
@@ -165,15 +260,22 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Custom focus styles for better accessibility */
+/* Polène focus styles */
 .focus-visible:focus-visible {
-  outline: 2px solid theme('colors.amber.500');
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
 /* Image loading states */
 .image-loading {
-  background: linear-gradient(90deg, #fef3c7 0%, #fde68a 50%, #fef3c7 100%);
+  background: linear-gradient(90deg, var(--secondary) 0%, var(--muted) 50%, var(--secondary) 100%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
+}
+
+/* Header scroll effects */
+.header-scrolled {
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
 }
