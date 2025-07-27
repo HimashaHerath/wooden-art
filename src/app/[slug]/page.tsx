@@ -164,7 +164,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               {product.material && ` • ${product.material}`}
             </p>
             <p className="font-sans text-xl font-bold text-foreground">
-              {product.discount?.percentage ? (\n                <>\n                  <span className=\"line-through text-muted-foreground mr-2\">\n                    LKR {product.price.toLocaleString()}\n                  </span>\n                  <span className=\"text-green-600\">\n                    LKR {Math.round(product.price * (1 - product.discount.percentage / 100)).toLocaleString()}\n                  </span>\n                  <span className=\"text-sm text-green-600 ml-2\">({product.discount.percentage}% off)</span>\n                </>\n              ) : (\n                `LKR ${product.price.toLocaleString()}`\n              )}
+              LKR {product.price.toLocaleString()}
             </p>
           </div>
 
