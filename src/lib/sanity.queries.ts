@@ -19,7 +19,16 @@ export const productsQuery = groq`
     available,
     featured,
     status,
-    seo
+    seo,
+    brand,
+    itemNumber,
+    ean,
+    color,
+    structuredDimensions,
+    netWeight,
+    discount,
+    technicalSpecs,
+    manufacturerInfo
   }
 `
 
@@ -39,7 +48,16 @@ export const productBySlugQuery = groq`
     featured,
     status,
     content,
-    seo
+    seo,
+    brand,
+    itemNumber,
+    ean,
+    color,
+    structuredDimensions,
+    netWeight,
+    discount,
+    technicalSpecs,
+    manufacturerInfo
   }
 `
 
@@ -77,7 +95,16 @@ const fallbackProducts: ProductWithImageUrls[] = [
     material: 'Teak wood',
     available: true,
     featured: true,
-    status: 'in-stock'
+    status: 'in-stock',
+    brand: 'Wooden Art Gallery',
+    itemNumber: 'WA-001',
+    color: 'Natural Teak',
+    structuredDimensions: {
+      length: 20,
+      width: 20,
+      height: 8
+    },
+    netWeight: 0.5
   },
   {
     _id: 'fallback-2',
@@ -93,7 +120,16 @@ const fallbackProducts: ProductWithImageUrls[] = [
     material: 'Mahogany',
     available: true,
     featured: false,
-    status: 'in-stock'
+    status: 'in-stock',
+    brand: 'Wooden Art Gallery',
+    itemNumber: 'WA-002',
+    color: 'Rich Mahogany',
+    structuredDimensions: {
+      length: 61,
+      width: 41,
+      height: 5
+    },
+    netWeight: 2.1
   }
 ]
 
@@ -157,7 +193,16 @@ export async function getFeaturedProducts(): Promise<ProductWithImageUrls[]> {
         available,
         featured,
         status,
-        seo
+        seo,
+        brand,
+        itemNumber,
+        ean,
+        color,
+        structuredDimensions,
+        netWeight,
+        discount,
+        technicalSpecs,
+        manufacturerInfo
       }
     `
     const products = await sanityFetch<Product[]>(featuredQuery, {}, {

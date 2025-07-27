@@ -12,6 +12,24 @@ export const productType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'brand',
+      title: 'Brand',
+      type: 'string',
+      placeholder: 'e.g., Arcchio Lamps, Custom Woodworks',
+    }),
+    defineField({
+      name: 'itemNumber',
+      title: 'Item Number / SKU',
+      type: 'string',
+      placeholder: 'e.g., WA-001, SKU12345',
+    }),
+    defineField({
+      name: 'ean',
+      title: 'EAN (European Article Number)',
+      type: 'string',
+      placeholder: 'e.g., 1234567890123',
+    }),
+    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
@@ -46,9 +64,19 @@ export const productType = defineType({
           { title: 'Sculptures', value: 'sculptures' },
           { title: 'Kitchen', value: 'kitchen' },
           { title: 'Home Decor', value: 'home-decor' },
+          { title: 'Ceiling Light', value: 'ceiling-light' },
+          { title: 'Wall Light', value: 'wall-light' },
+          { title: 'Floor Lamp', value: 'floor-lamp' },
+          { title: 'Table Lamp', value: 'table-lamp' },
         ],
       },
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'color',
+      title: 'Color',
+      type: 'string',
+      placeholder: 'e.g., Natural Wood, White, Black, Oak Finish',
     }),
     defineField({
       name: 'featured_image',
@@ -86,9 +114,44 @@ export const productType = defineType({
     }),
     defineField({
       name: 'dimensions',
-      title: 'Dimensions',
+      title: 'Dimensions (Free Text)',
       type: 'string',
       placeholder: 'e.g., 12" diameter x 4" height',
+    }),
+    defineField({
+      name: 'structuredDimensions',
+      title: 'Structured Dimensions',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'length',
+          title: 'Length (cm)',
+          type: 'number',
+          validation: (rule) => rule.min(0),
+        }),
+        defineField({
+          name: 'width',
+          title: 'Width (cm)',
+          type: 'number',
+          validation: (rule) => rule.min(0),
+        }),
+        defineField({
+          name: 'height',
+          title: 'Height (cm)',
+          type: 'number',
+          validation: (rule) => rule.min(0),
+        }),
+      ],
+      options: {
+        collapsible: true,
+        collapsed: true,
+      },
+    }),
+    defineField({
+      name: 'netWeight',
+      title: 'Net Weight (kg)',
+      type: 'number',
+      validation: (rule) => rule.min(0),
     }),
     defineField({
       name: 'material',
@@ -110,7 +173,7 @@ export const productType = defineType({
     }),
     defineField({
       name: 'status',
-      title: 'Status',
+      title: 'Stock Status',
       type: 'string',
       options: {
         list: [
@@ -121,6 +184,110 @@ export const productType = defineType({
         ],
       },
       initialValue: 'in-stock',
+    }),
+    defineField({
+      name: 'discount',
+      title: 'Discount / Offer',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'percentage',
+          title: 'Discount Percentage',
+          type: 'number',
+          validation: (rule) => rule.min(0).max(100),
+        }),
+        defineField({
+          name: 'description',
+          title: 'Offer Description',
+          type: 'string',
+          placeholder: 'e.g., Holiday Sale, Limited Time Offer',
+        }),
+      ],
+      options: {
+        collapsible: true,
+        collapsed: true,
+      },
+    }),
+    defineField({
+      name: 'technicalSpecs',
+      title: 'Technical Specifications',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'lightBulbIncluded',
+          title: 'Light Bulb Included',
+          type: 'boolean',
+          initialValue: false,
+        }),
+        defineField({
+          name: 'numberOfBulbs',
+          title: 'Number of Light Bulbs',
+          type: 'number',
+          validation: (rule) => rule.min(0),
+        }),
+        defineField({
+          name: 'baseType',
+          title: 'Base Type',
+          type: 'string',
+          placeholder: 'e.g., GU10, E27, E14',
+        }),
+        defineField({
+          name: 'wattage',
+          title: 'Wattage (watts)',
+          type: 'number',
+          validation: (rule) => rule.min(0),
+        }),
+        defineField({
+          name: 'integratedLEDs',
+          title: 'Integrated LEDs',
+          type: 'boolean',
+          initialValue: false,
+        }),
+        defineField({
+          name: 'dimmable',
+          title: 'Dimmable',
+          type: 'boolean',
+          initialValue: false,
+        }),
+        defineField({
+          name: 'ipCode',
+          title: 'IP Code (Ingress Protection)',
+          type: 'string',
+          placeholder: 'e.g., IP20, IP44, IP65',
+        }),
+      ],
+      options: {
+        collapsible: true,
+        collapsed: true,
+      },
+    }),
+    defineField({
+      name: 'manufacturerInfo',
+      title: 'Manufacturer Information',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'name',
+          title: 'Manufacturer Name',
+          type: 'string',
+        }),
+        defineField({
+          name: 'country',
+          title: 'Country of Origin',
+          type: 'string',
+          placeholder: 'e.g., Sri Lanka, Germany, Italy',
+        }),
+        defineField({
+          name: 'notes',
+          title: 'Internal Notes',
+          type: 'text',
+          rows: 2,
+        }),
+      ],
+      options: {
+        collapsible: true,
+        collapsed: true,
+      },
     }),
     defineField({
       name: 'content',

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { BLUR_PLACEHOLDER } from "@/lib/image-utils";
+import { Check, X } from "lucide-react";
 
 import { ProductWithImageUrls } from '@/lib/sanity.types'
 
@@ -66,6 +67,19 @@ export default function ProductCard({ product, className, priority = false }: Pr
               <div className="absolute inset-0 image-loading" />
             )}
 
+            {/* Stock Status Indicator */}
+            <div className="absolute top-2 right-2 z-10">
+              {product.status === 'in-stock' ? (
+                <div className="bg-green-500 text-white rounded-full p-1.5 shadow-md">
+                  <Check className="w-3 h-3" />
+                </div>
+              ) : (
+                <div className="bg-red-500 text-white rounded-full p-1.5 shadow-md">
+                  <X className="w-3 h-3" />
+                </div>
+              )}
+            </div>
+
             {/* Simple hover overlay with "View" label */}
             <div 
               className={cn(
@@ -88,9 +102,30 @@ export default function ProductCard({ product, className, priority = false }: Pr
           {product.name}
         </h3>
         
-        {/* Price - Bold 14px */}
+        {/* Price with Discount - Bold 14px */}
         <p className="font-sans text-sm font-bold text-foreground">
-          LKR {product.price.toLocaleString()}
+          {product.discount?.percentage ? (
+            <>
+              <span className="line-through text-muted-foreground mr-1 text-xs">
+                LKR {product.price.toLocaleString()}
+              </span>
+              <span className="text-green-600">
+                LKR {Math.round(product.price * (1 - product.discount.percentage / 100)).toLocaleString()}
+              </span>
+            </>
+          ) : (
+            `LKR ${product.price.toLocaleString()}`
+          )}
+        </p>
+        
+        {/* Stock Status Text */}
+        <p className={cn(
+          "font-sans text-xs",
+          product.status === 'in-stock' ? "text-green-600" : "text-red-500"
+        )}>
+          {product.status === 'in-stock' ? 'In Stock' : 
+           product.status === 'out-of-stock' ? 'Out of Stock' :
+           product.status === 'made-to-order' ? 'Made to Order' : 'Coming Soon'}
         </p>
       </div>
     </Link>

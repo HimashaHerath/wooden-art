@@ -164,7 +164,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               {product.material && ` • ${product.material}`}
             </p>
             <p className="font-sans text-xl font-bold text-foreground">
-              LKR {product.price.toLocaleString()}
+              {product.discount?.percentage ? (\n                <>\n                  <span className=\"line-through text-muted-foreground mr-2\">\n                    LKR {product.price.toLocaleString()}\n                  </span>\n                  <span className=\"text-green-600\">\n                    LKR {Math.round(product.price * (1 - product.discount.percentage / 100)).toLocaleString()}\n                  </span>\n                  <span className=\"text-sm text-green-600 ml-2\">({product.discount.percentage}% off)</span>\n                </>\n              ) : (\n                `LKR ${product.price.toLocaleString()}`\n              )}
             </p>
           </div>
 
@@ -186,25 +186,154 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           </div>
 
           {/* Product Details */}
-          {(product.dimensions || product.material) && (
-            <div className="mb-12 border-t border-border pt-8">
-              <h3 className="font-serif text-lg text-foreground mb-6 text-center">Details</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-lg mx-auto">
-                {product.dimensions && (
-                  <div className="text-center">
-                    <dt className="font-sans text-sm text-muted-foreground mb-1">Dimensions</dt>
-                    <dd className="font-sans text-sm text-foreground">{product.dimensions}</dd>
-                  </div>
-                )}
-                {product.material && (
-                  <div className="text-center">
-                    <dt className="font-sans text-sm text-muted-foreground mb-1">Material</dt>
-                    <dd className="font-sans text-sm text-foreground">{product.material}</dd>
-                  </div>
-                )}
-              </div>
+          <div className="mb-12 border-t border-border pt-8">
+            <h3 className="font-serif text-lg text-foreground mb-6 text-center">Product Details</h3>
+            
+            {/* Basic Information */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto mb-8">
+              {product.brand && (
+                <div className="text-center">
+                  <dt className="font-sans text-sm text-muted-foreground mb-1">Brand</dt>
+                  <dd className="font-sans text-sm text-foreground">{product.brand}</dd>
+                </div>
+              )}
+              {product.itemNumber && (
+                <div className="text-center">
+                  <dt className="font-sans text-sm text-muted-foreground mb-1">Item Number</dt>
+                  <dd className="font-sans text-sm text-foreground">{product.itemNumber}</dd>
+                </div>
+              )}
+              {product.ean && (
+                <div className="text-center">
+                  <dt className="font-sans text-sm text-muted-foreground mb-1">EAN</dt>
+                  <dd className="font-sans text-sm text-foreground">{product.ean}</dd>
+                </div>
+              )}
+              {product.color && (
+                <div className="text-center">
+                  <dt className="font-sans text-sm text-muted-foreground mb-1">Color</dt>
+                  <dd className="font-sans text-sm text-foreground">{product.color}</dd>
+                </div>
+              )}
+              {product.material && (
+                <div className="text-center">
+                  <dt className="font-sans text-sm text-muted-foreground mb-1">Material</dt>
+                  <dd className="font-sans text-sm text-foreground">{product.material}</dd>
+                </div>
+              )}
+              {product.netWeight && (
+                <div className="text-center">
+                  <dt className="font-sans text-sm text-muted-foreground mb-1">Net Weight</dt>
+                  <dd className="font-sans text-sm text-foreground">{product.netWeight} kg</dd>
+                </div>
+              )}
             </div>
-          )}
+
+            {/* Dimensions */}
+            {(product.dimensions || product.structuredDimensions) && (
+              <div className="mb-8">
+                <h4 className="font-serif text-base text-foreground mb-4 text-center">Dimensions</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-2xl mx-auto">
+                  {product.dimensions && (
+                    <div className="text-center">
+                      <dt className="font-sans text-sm text-muted-foreground mb-1">Description</dt>
+                      <dd className="font-sans text-sm text-foreground">{product.dimensions}</dd>
+                    </div>
+                  )}
+                  {product.structuredDimensions?.length && (
+                    <div className="text-center">
+                      <dt className="font-sans text-sm text-muted-foreground mb-1">Length</dt>
+                      <dd className="font-sans text-sm text-foreground">{product.structuredDimensions.length} cm</dd>
+                    </div>
+                  )}
+                  {product.structuredDimensions?.width && (
+                    <div className="text-center">
+                      <dt className="font-sans text-sm text-muted-foreground mb-1">Width</dt>
+                      <dd className="font-sans text-sm text-foreground">{product.structuredDimensions.width} cm</dd>
+                    </div>
+                  )}
+                  {product.structuredDimensions?.height && (
+                    <div className="text-center">
+                      <dt className="font-sans text-sm text-muted-foreground mb-1">Height</dt>
+                      <dd className="font-sans text-sm text-foreground">{product.structuredDimensions.height} cm</dd>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Technical Specifications */}
+            {product.technicalSpecs && Object.values(product.technicalSpecs).some(val => val !== undefined && val !== null && val !== '') && (
+              <div className="mb-8">
+                <h4 className="font-serif text-base text-foreground mb-4 text-center">Technical Specifications</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
+                  {product.technicalSpecs.lightBulbIncluded !== undefined && (
+                    <div className="text-center">
+                      <dt className="font-sans text-sm text-muted-foreground mb-1">Light Bulb Included</dt>
+                      <dd className="font-sans text-sm text-foreground">{product.technicalSpecs.lightBulbIncluded ? 'Yes' : 'No'}</dd>
+                    </div>
+                  )}
+                  {product.technicalSpecs.numberOfBulbs && (
+                    <div className="text-center">
+                      <dt className="font-sans text-sm text-muted-foreground mb-1">Number of Bulbs</dt>
+                      <dd className="font-sans text-sm text-foreground">{product.technicalSpecs.numberOfBulbs}</dd>
+                    </div>
+                  )}
+                  {product.technicalSpecs.baseType && (
+                    <div className="text-center">
+                      <dt className="font-sans text-sm text-muted-foreground mb-1">Base Type</dt>
+                      <dd className="font-sans text-sm text-foreground">{product.technicalSpecs.baseType}</dd>
+                    </div>
+                  )}
+                  {product.technicalSpecs.wattage && (
+                    <div className="text-center">
+                      <dt className="font-sans text-sm text-muted-foreground mb-1">Wattage</dt>
+                      <dd className="font-sans text-sm text-foreground">{product.technicalSpecs.wattage}W</dd>
+                    </div>
+                  )}
+                  {product.technicalSpecs.integratedLEDs !== undefined && (
+                    <div className="text-center">
+                      <dt className="font-sans text-sm text-muted-foreground mb-1">Integrated LEDs</dt>
+                      <dd className="font-sans text-sm text-foreground">{product.technicalSpecs.integratedLEDs ? 'Yes' : 'No'}</dd>
+                    </div>
+                  )}
+                  {product.technicalSpecs.dimmable !== undefined && (
+                    <div className="text-center">
+                      <dt className="font-sans text-sm text-muted-foreground mb-1">Dimmable</dt>
+                      <dd className="font-sans text-sm text-foreground">{product.technicalSpecs.dimmable ? 'Yes' : 'No'}</dd>
+                    </div>
+                  )}
+                  {product.technicalSpecs.ipCode && (
+                    <div className="text-center">
+                      <dt className="font-sans text-sm text-muted-foreground mb-1">IP Code</dt>
+                      <dd className="font-sans text-sm text-foreground">{product.technicalSpecs.ipCode}</dd>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Manufacturer Information */}
+            {product.manufacturerInfo && Object.values(product.manufacturerInfo).some(val => val !== undefined && val !== null && val !== '') && (
+              <div className="mb-8">
+                <h4 className="font-serif text-base text-foreground mb-4 text-center">Manufacturer Information</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-lg mx-auto">
+                  {product.manufacturerInfo.name && (
+                    <div className="text-center">
+                      <dt className="font-sans text-sm text-muted-foreground mb-1">Manufacturer</dt>
+                      <dd className="font-sans text-sm text-foreground">{product.manufacturerInfo.name}</dd>
+                    </div>
+                  )}
+                  {product.manufacturerInfo.country && (
+                    <div className="text-center">
+                      <dt className="font-sans text-sm text-muted-foreground mb-1">Country of Origin</dt>
+                      <dd className="font-sans text-sm text-foreground">{product.manufacturerInfo.country}</dd>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
 
           {/* Contact Section - Polène Consistent */}
           <div className="border-t border-border pt-8">
