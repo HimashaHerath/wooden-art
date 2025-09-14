@@ -1,47 +1,45 @@
-"use client";
-import { cn } from "@/lib/utils";
+"use client"
+import { cn } from "@/lib/utils"
 
 interface CategoryFilterProps {
-  categories: string[];
-  activeCategory: string | null;
-  onCategoryChange: (category: string | null) => void;
+  categories: string[]
+  activeCategory: string | null
+  onCategoryChange: (category: string | null) => void
 }
 
-export default function CategoryFilter({ 
-  categories, 
-  activeCategory, 
-  onCategoryChange 
-}: CategoryFilterProps) {
-  const allCategories = ['All', ...categories];
+export default function CategoryFilter({ categories, activeCategory, onCategoryChange }: CategoryFilterProps) {
+  const allCategories = ["All", ...categories]
 
   return (
-    <div className="border-b border-border bg-background">
-      <div className="gutter-desktop">
-        <div className="flex overflow-x-auto scrollbar-hide py-4 space-x-8">
+    <div className="border-b border-border bg-background sticky top-0 z-10">
+      <div className="px-4 md:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="flex flex-wrap gap-2 md:gap-4 lg:gap-6 py-3 md:py-4">
           {allCategories.map((category) => {
-            const isActive = (category === 'All' && !activeCategory) || 
-                           (category !== 'All' && activeCategory === category);
-            
+            const isActive =
+              (category === "All" && !activeCategory) || (category !== "All" && activeCategory === category)
+
             return (
               <button
                 key={category}
-                onClick={() => onCategoryChange(category === 'All' ? null : category)}
+                onClick={() => onCategoryChange(category === "All" ? null : category)}
                 className={cn(
-                  "relative font-sans text-sm uppercase tracking-wider whitespace-nowrap transition-polene touch-target flex items-center justify-center min-w-max",
-                  isActive
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground"
+                  "relative font-sans text-xs md:text-sm uppercase tracking-wider transition-all duration-200 ease-in-out",
+                  "min-h-[44px] px-3 md:px-4 py-2 flex items-center justify-center",
+                  "rounded-md hover:bg-muted/50 active:scale-95",
+                  "focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2",
+                  "text-center leading-tight",
+                  isActive ? "text-foreground font-medium" : "text-muted-foreground hover:text-foreground",
                 )}
               >
                 {category}
                 {isActive && (
-                  <span className="absolute -bottom-2 left-0 w-full h-0.5 bg-accent" />
+                  <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-6 md:w-8 h-0.5 bg-accent rounded-full" />
                 )}
               </button>
-            );
+            )
           })}
         </div>
       </div>
     </div>
-  );
+  )
 }
