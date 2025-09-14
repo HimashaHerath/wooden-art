@@ -66,7 +66,7 @@ export interface Product {
   material?: string
   available: boolean
   featured: boolean
-  status: string
+  status: "in-stock" | "out-of-stock" | "made-to-order" | "coming-soon"
   content?: PortableTextBlock[]
   seo?: {
     title?: string

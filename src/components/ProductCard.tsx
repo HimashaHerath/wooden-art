@@ -5,17 +5,10 @@ import Link from "next/link"
 import { useState } from "react"
 import { cn } from "@/lib/utils"
 import { Check, X } from "lucide-react"
+import { ProductWithImageUrls } from '@/lib/sanity.types'
 
 interface ProductCardProps {
-  product: {
-    _id: string
-    name: string
-    price: number
-    featured_image?: string
-    slug: { current: string }
-    status: "in-stock" | "out-of-stock" | "made-to-order" | "coming-soon"
-    discount?: { percentage: number }
-  }
+  product: ProductWithImageUrls
   className?: string
   priority?: boolean
 }
