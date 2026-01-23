@@ -1,5 +1,5 @@
 import { urlFor } from '@/sanity/lib/image'
-import { SanityImageSource } from '@sanity/image-url/lib/types/types'
+import { type SanityImageSource } from '@sanity/image-url'
 
 // Generate a low-quality blur placeholder from Sanity image
 export function generateBlurDataURL(imageRef: SanityImageSource): string {
