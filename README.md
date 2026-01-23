@@ -34,14 +34,14 @@ A beautiful, modern e-commerce website for showcasing and managing handcrafted w
 
 ### Prerequisites
 - Node.js 18+ 
-- npm/yarn/pnpm
+- pnpm
 - Sanity account (free)
 
 ### 1. Clone & Install
 ```bash
 git clone <repository-url>
 cd wooden-art
-npm install
+pnpm install
 ```
 
 ### 2. Environment Setup
@@ -53,7 +53,7 @@ NEXT_PUBLIC_SANITY_DATASET="production"
 
 ### 3. Run Development
 ```bash
-npm run dev
+pnpm dev
 ```
 
 Visit:
@@ -150,14 +150,14 @@ wooden-art/
 
 ```bash
 # Development
-npm run dev          # Start dev server
-npm run build        # Build for production
-npm run start        # Start production server
-npm run lint         # Run ESLint
+pnpm dev          # Start dev server
+pnpm build        # Build for production
+pnpm start        # Start production server
+pnpm lint         # Run ESLint
 
 # Sanity
-npx sanity deploy    # Deploy Studio to Sanity hosting
-npx sanity cors add  # Add CORS origins
+pnpm exec sanity deploy    # Deploy Studio to Sanity hosting
+pnpm exec sanity cors add  # Add CORS origins
 ```
 
 ## 🌐 Deployment
@@ -165,7 +165,7 @@ npx sanity cors add  # Add CORS origins
 ### 1. **Vercel (Recommended)**
 ```bash
 # Install Vercel CLI
-npm i -g vercel
+pnpm add -g vercel
 
 # Deploy
 vercel
@@ -217,7 +217,7 @@ Set up webhooks in Sanity dashboard:
 1. Update `/src/sanity/schemaTypes/product.ts`
 2. Add field to TypeScript types
 3. Update queries and components
-4. Deploy Studio: `npx sanity deploy`
+4. Deploy Studio: `pnpm exec sanity deploy`
 
 ### Styling Changes
 - Edit Tailwind classes in components

@@ -60,6 +60,18 @@ export default function SiteFooter() {
           <p className="font-sans text-xs text-muted-foreground">
             &copy; 2024 Wooden Art Gallery. All rights reserved.
           </p>
+          <p className="font-sans text-xs text-muted-foreground mt-2">
+            Built by{" "}
+            <a
+              href="https://www.infrasurge.com/"
+              className="hover:text-accent transition-polene"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Infrasurge
+            </a>
+            .
+          </p>
         </div>
       </div>
     </footer>
