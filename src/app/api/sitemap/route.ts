@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { getProductSlugs } from '@/lib/sanity.queries';
 
+export const dynamic = 'force-static';
+
 export async function GET() {
   try {
     const productSlugs = await getProductSlugs();
