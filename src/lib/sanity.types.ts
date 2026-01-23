@@ -1,5 +1,5 @@
 import { PortableTextBlock } from '@portabletext/types'
-import { Reference } from '@sanity/types'
+import { type Reference } from 'sanity'
 
 export interface SanityImage {
   _type: 'image'
