@@ -2,7 +2,7 @@
 import { useState, useMemo } from "react";
 import ProductCard from "@/components/ProductCard";
 import CategoryFilter from "@/components/CategoryFilter";
-import { ProductWithImageUrls } from "@/lib/sanity.types";
+import { ProductWithImageUrls, normalizePrice } from "@/lib/sanity.types";
 
 interface ProductsPageClientProps {
   products: ProductWithImageUrls[];
@@ -32,10 +32,10 @@ export default function ProductsPageClient({ products, categories }: ProductsPag
         result = result.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
         break;
       case "price-asc":
-        result = result.sort((a, b) => (a.price?.amount ?? 0) - (b.price?.amount ?? 0));
+        result = result.sort((a, b) => normalizePrice(a.price).amount - normalizePrice(b.price).amount);
         break;
       case "price-desc":
-        result = result.sort((a, b) => (b.price?.amount ?? 0) - (a.price?.amount ?? 0));
+        result = result.sort((a, b) => normalizePrice(b.price).amount - normalizePrice(a.price).amount);
         break;
       case "name-asc":
         result = result.sort((a, b) => a.name.localeCompare(b.name));

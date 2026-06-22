@@ -57,6 +57,16 @@ export interface Price {
   currency: SupportedCurrency
 }
 
+/**
+ * Normalizes price from either old format (plain number) or new format ({ amount, currency }).
+ * Existing Sanity documents saved before the schema change will have price as a number.
+ */
+export function normalizePrice(price: Price | number | null | undefined): Price {
+  if (!price) return { amount: 0, currency: 'LKR' }
+  if (typeof price === 'number') return { amount: price, currency: 'LKR' }
+  return price
+}
+
 export interface Product {
   _id: string
   _type: 'product'
@@ -65,7 +75,8 @@ export interface Product {
     current: string
   }
   description: string
-  price: Price
+  // price can be the old flat number (legacy) or new { amount, currency } object
+  price: Price | number
   category: string
   featured_image: SanityImage
   gallery?: GalleryItem[]

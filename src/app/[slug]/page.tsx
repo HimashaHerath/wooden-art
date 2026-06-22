@@ -5,6 +5,7 @@ import type { Metadata } from "next"
 import { getProductBySlug, getProductSlugs } from "@/lib/sanity.queries"
 import ImageCarousel from "@/components/ImageCarousel"
 import PortableText from "@/components/PortableText"
+import { normalizePrice } from "@/lib/sanity.types"
 
 export async function generateStaticParams() {
   const slugs = await getProductSlugs()
@@ -97,8 +98,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     },
     offers: {
       "@type": "Offer",
-      price: product.price.amount,
-      priceCurrency: product.price.currency,
+      price: normalizePrice(product.price).amount,
+      priceCurrency: normalizePrice(product.price).currency,
       availability: product.available ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
       seller: {
         "@type": "Organization",
@@ -163,7 +164,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               {product.material && ` • ${product.material}`}
             </p>
             <p className="font-sans text-2xl font-bold text-foreground mb-8">
-              {product.price.currency} {product.price.amount.toLocaleString()}
+              {normalizePrice(product.price).currency} {normalizePrice(product.price).amount.toLocaleString()}
             </p>
 
             {/* Enquiry CTA — above the fold */}

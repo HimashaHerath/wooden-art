@@ -5,7 +5,7 @@ import Link from "next/link"
 import { useState } from "react"
 import { cn } from "@/lib/utils"
 import { Check, X } from "lucide-react"
-import { ProductWithImageUrls } from '@/lib/sanity.types'
+import { ProductWithImageUrls, normalizePrice } from '@/lib/sanity.types'
 
 interface ProductCardProps {
   product: ProductWithImageUrls
@@ -92,18 +92,22 @@ export default function ProductCard({ product, className, priority = false }: Pr
         <h3 className="font-serif text-base lg:text-lg text-foreground line-clamp-2 leading-tight">{product.name}</h3>
 
         <p className="font-sans text-sm lg:text-base font-semibold text-foreground">
-          {product.discount?.percentage ? (
-            <>
-              <span className="line-through text-muted-foreground mr-2 text-xs lg:text-sm">
-                {product.price.currency} {product.price.amount.toLocaleString()}
-              </span>
-              <span className="text-accent">
-                {product.price.currency} {Math.round(product.price.amount * (1 - product.discount.percentage / 100)).toLocaleString()}
-              </span>
-            </>
-          ) : (
-            `${product.price.currency} ${product.price.amount.toLocaleString()}`
-          )}
+          {(() => {
+            const price = normalizePrice(product.price)
+            if (product.discount?.percentage) {
+              return (
+                <>
+                  <span className="line-through text-muted-foreground mr-2 text-xs lg:text-sm">
+                    {price.currency} {price.amount.toLocaleString()}
+                  </span>
+                  <span className="text-accent">
+                    {price.currency} {Math.round(price.amount * (1 - product.discount.percentage / 100)).toLocaleString()}
+                  </span>
+                </>
+              )
+            }
+            return `${price.currency} ${price.amount.toLocaleString()}`
+          })()}
         </p>
 
         <p
