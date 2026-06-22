@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@400&display=swap');
+/* Fonts are loaded via next/font in layout.tsx — do not add @import here */
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -180,7 +180,7 @@
   
   /* Interaction states */
   .transition-polene {
-    transition: all 150ms ease-out;
+    transition: all 220ms ease-out;
   }
   
   /* Touch target minimum */

@@ -50,6 +50,13 @@ export interface ManufacturerInfo {
   notes?: string
 }
 
+export type SupportedCurrency = 'LKR' | 'USD' | 'EUR' | 'GBP' | 'AUD'
+
+export interface Price {
+  amount: number
+  currency: SupportedCurrency
+}
+
 export interface Product {
   _id: string
   _type: 'product'
@@ -58,7 +65,7 @@ export interface Product {
     current: string
   }
   description: string
-  price: number
+  price: Price
   category: string
   featured_image: SanityImage
   gallery?: GalleryItem[]

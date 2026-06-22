@@ -95,14 +95,14 @@ export default function ProductCard({ product, className, priority = false }: Pr
           {product.discount?.percentage ? (
             <>
               <span className="line-through text-muted-foreground mr-2 text-xs lg:text-sm">
-                LKR {product.price.toLocaleString()}
+                {product.price.currency} {product.price.amount.toLocaleString()}
               </span>
               <span className="text-accent">
-                LKR {Math.round(product.price * (1 - product.discount.percentage / 100)).toLocaleString()}
+                {product.price.currency} {Math.round(product.price.amount * (1 - product.discount.percentage / 100)).toLocaleString()}
               </span>
             </>
           ) : (
-            `LKR ${product.price.toLocaleString()}`
+            `${product.price.currency} ${product.price.amount.toLocaleString()}`
           )}
         </p>
 

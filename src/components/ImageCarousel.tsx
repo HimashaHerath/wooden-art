@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect, useCallback } from "react"
+import { useState, useCallback } from "react"
 import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -34,19 +34,19 @@ export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
     setIsImageLoading(true)
   }
 
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
+  // Scoped keyboard navigation — only fires when carousel has focus
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
       if (e.key === "ArrowLeft") {
+        e.preventDefault()
         goToPrevious()
       } else if (e.key === "ArrowRight") {
+        e.preventDefault()
         goToNext()
       }
-    }
-
-    window.addEventListener("keydown", handleKeyDown)
-    return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [goToPrevious, goToNext])
+    },
+    [goToPrevious, goToNext],
+  )
 
   if (totalSlides === 0) {
     return (
@@ -62,12 +62,19 @@ export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
   const currentImage = validImages[currentIndex]
 
   return (
-    <div className="relative w-full bg-secondary">
+    <div
+      className="relative w-full bg-secondary outline-none"
+      tabIndex={0}
+      onKeyDown={handleKeyDown}
+      role="region"
+      aria-label={`Image gallery for ${alt}`}
+      aria-roledescription="carousel"
+    >
       {/* Main Image Container */}
       <div className="relative w-full aspect-[4/3] max-h-[700px]">
         <Image
           src={currentImage || "/placeholder.svg"}
-          alt={`${alt} - Image ${currentIndex + 1}`}
+          alt={`${alt} - Image ${currentIndex + 1} of ${totalSlides}`}
           fill
           className={cn("object-cover transition-polene", isImageLoading ? "opacity-0" : "opacity-100")}
           onLoad={() => setIsImageLoading(false)}
@@ -75,7 +82,7 @@ export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
           placeholder="blur"
           blurDataURL={BLUR_PLACEHOLDER}
-          quality={90}
+          quality={85}
         />
 
         {/* Loading skeleton */}
@@ -109,10 +116,12 @@ export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
 
       {/* Dot Indicators - only show if multiple images */}
       {totalSlides > 1 && (
-        <div className="absolute bottom-3 md:bottom-6 left-1/2 -translate-x-1/2 flex gap-1.5 md:gap-2 px-2">
+        <div className="absolute bottom-3 md:bottom-6 left-1/2 -translate-x-1/2 flex gap-1.5 md:gap-2 px-2" role="tablist" aria-label="Image slides">
           {validImages.map((_, index) => (
             <button
               key={index}
+              role="tab"
+              aria-selected={index === currentIndex}
               onClick={() => goToSlide(index)}
               className={cn(
                 "relative min-h-[44px] min-w-[44px] p-2 md:p-3 flex items-center justify-center transition-all duration-200",
@@ -142,3 +151,4 @@ export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
     </div>
   )
 }
+

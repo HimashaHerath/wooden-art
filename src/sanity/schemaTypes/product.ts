@@ -49,8 +49,35 @@ export const productType = defineType({
     defineField({
       name: 'price',
       title: 'Price',
-      type: 'number',
-      validation: (rule) => rule.required().min(0),
+      type: 'object',
+      options: {
+        columns: 2,
+      },
+      fields: [
+        defineField({
+          name: 'amount',
+          title: 'Amount',
+          type: 'number',
+          validation: (rule) => rule.required().min(0),
+        }),
+        defineField({
+          name: 'currency',
+          title: 'Currency',
+          type: 'string',
+          initialValue: 'LKR',
+          options: {
+            list: [
+              { title: '🇱🇰 LKR – Sri Lankan Rupee', value: 'LKR' },
+              { title: '🇺🇸 USD – US Dollar', value: 'USD' },
+              { title: '🇪🇺 EUR – Euro', value: 'EUR' },
+              { title: '🇬🇧 GBP – British Pound', value: 'GBP' },
+              { title: '🇦🇺 AUD – Australian Dollar', value: 'AUD' },
+            ],
+          },
+          validation: (rule) => rule.required(),
+        }),
+      ],
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'category',
@@ -347,14 +374,17 @@ export const productType = defineType({
       title: 'name',
       media: 'featured_image',
       subtitle: 'category',
-      price: 'price',
+      priceAmount: 'price.amount',
+      priceCurrency: 'price.currency',
     },
     prepare(selection) {
-      const { title, media, subtitle, price } = selection
+      const { title, media, subtitle, priceAmount, priceCurrency } = selection
+      const currency = priceCurrency || 'LKR'
+      const amount = priceAmount != null ? priceAmount.toLocaleString() : '—'
       return {
         title,
         media,
-        subtitle: `${subtitle} - $${price}`,
+        subtitle: `${subtitle} – ${currency} ${amount}`,
       }
     },
   },

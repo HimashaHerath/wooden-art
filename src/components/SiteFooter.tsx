@@ -58,7 +58,7 @@ export default function SiteFooter() {
 
         <div className="border-t border-border mt-8 lg:mt-12 pt-8 text-center">
           <p className="font-sans text-xs text-muted-foreground">
-            &copy; 2024 Wooden Art Gallery. All rights reserved.
+            &copy; {new Date().getFullYear()} Wooden Art Gallery. All rights reserved.
           </p>
           <p className="font-sans text-xs text-muted-foreground mt-2">
             Built by{" "}

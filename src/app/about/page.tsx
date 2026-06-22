@@ -1,5 +1,16 @@
 import Link from "next/link"
 import { ChevronLeft } from "lucide-react"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "About Us | Wooden Art Gallery",
+  description: "Learn about Wooden Art Gallery — preserving Sri Lankan woodworking traditions with contemporary design. Handcrafted furniture and wooden art made by skilled local artisans.",
+  openGraph: {
+    title: "About Us | Wooden Art Gallery",
+    description: "Learn about Wooden Art Gallery — preserving Sri Lankan woodworking traditions with contemporary design.",
+    type: "website",
+  },
+}
 
 export default function AboutPage() {
   return (

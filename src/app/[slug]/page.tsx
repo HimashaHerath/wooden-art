@@ -1,4 +1,4 @@
-import { ChevronLeft } from "lucide-react"
+import { ChevronLeft, Phone, Mail } from "lucide-react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
@@ -97,8 +97,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     },
     offers: {
       "@type": "Offer",
-      price: product.price,
-      priceCurrency: "LKR",
+      price: product.price.amount,
+      priceCurrency: product.price.currency,
       availability: product.available ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
       seller: {
         "@type": "Organization",
@@ -153,16 +153,36 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       {/* Product Information */}
       <div className="gutter-mobile md:gutter-desktop py-8 md:py-16">
         <div className="max-w-3xl mx-auto">
-          {/* Title Stack - Polène Typography */}
-          <div className="text-center mb-12">
+          {/* Title Stack */}
+          <div className="text-center mb-8">
             <h1 className="font-serif text-2xl md:text-[28px] lg:text-[32px] text-foreground mb-3 leading-tight">
               {product.name}
             </h1>
             <p className="font-sans text-sm uppercase tracking-wider text-muted-foreground mb-6">
-              {product.category}
+              {product.category?.replace(/-/g, " ")}
               {product.material && ` • ${product.material}`}
             </p>
-            <p className="font-sans text-xl font-bold text-foreground">LKR {product.price.toLocaleString()}</p>
+            <p className="font-sans text-2xl font-bold text-foreground mb-8">
+              {product.price.currency} {product.price.amount.toLocaleString()}
+            </p>
+
+            {/* Enquiry CTA — above the fold */}
+            <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-sm mx-auto">
+              <a
+                href="tel:+94112345678"
+                className="inline-flex items-center justify-center gap-2 bg-foreground text-background font-sans text-sm font-medium px-6 py-3 rounded-md hover:bg-accent transition-polene min-h-[44px]"
+              >
+                <Phone className="w-4 h-4" />
+                Call to Enquire
+              </a>
+              <a
+                href="mailto:info@woodenartgallery.lk"
+                className="inline-flex items-center justify-center gap-2 border border-border text-foreground font-sans text-sm px-6 py-3 rounded-md hover:border-accent hover:text-accent transition-polene min-h-[44px]"
+              >
+                <Mail className="w-4 h-4" />
+                Email Us
+              </a>
+            </div>
           </div>
 
           {/* Description Section */}
