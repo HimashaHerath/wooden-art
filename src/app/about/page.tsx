@@ -100,10 +100,10 @@ export default function AboutPage() {
                 </div>
                 <div>
                   <a
-                    href="mailto:info@woodenartgallery.lk"
+                    href="mailto:shopwoodenart@gmail.com"
                     className="text-muted-foreground hover:text-accent transition-polene text-lg"
                   >
-                    info@woodenartgallery.lk
+                    shopwoodenart@gmail.com
                   </a>
                 </div>
                 <div className="text-muted-foreground pt-4 border-t border-border">

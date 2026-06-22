@@ -8,7 +8,7 @@ export const BUSINESS_INFO = {
   
   // Contact Information - UPDATE WITH YOUR ACTUAL DETAILS
   contact: {
-    email: "info@woodenartgallery.lk", // Replace with your actual email
+    email: "shopwoodenart@gmail.com", // Replace with your actual email
     phone: "+94 11 234 5678", // Replace with your actual phone number
     address: {
       street: "Your Business Address", // Replace with your actual address

@@ -42,8 +42,8 @@ export default function SiteFooter() {
             </h5>
             <div className="font-sans text-sm text-muted-foreground space-y-3">
               <p>
-                <a href="mailto:info@woodenartgallery.lk" className="hover:text-accent transition-polene">
-                  info@woodenartgallery.lk
+                <a href="mailto:shopwoodenart@gmail.com" className="hover:text-accent transition-polene">
+                  shopwoodenart@gmail.com
                 </a>
               </p>
               <p>

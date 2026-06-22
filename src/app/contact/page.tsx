@@ -52,10 +52,10 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-sans text-base font-semibold text-foreground mb-2">Email</h3>
                     <a
-                      href="mailto:info@woodenartgallery.lk"
+                      href="mailto:shopwoodenart@gmail.com"
                       className="font-sans text-base text-muted-foreground hover:text-accent transition-polene"
                     >
-                      info@woodenartgallery.lk
+                      shopwoodenart@gmail.com
                     </a>
                   </div>
                 </div>
@@ -117,7 +117,7 @@ export default function ContactPage() {
             <div>
               <h2 className="font-serif text-2xl lg:text-3xl text-foreground mb-8">Send a Message</h2>
               <form
-                action="mailto:info@woodenartgallery.lk"
+                action="mailto:shopwoodenart@gmail.com"
                 method="post"
                 encType="text/plain"
                 className="space-y-5"

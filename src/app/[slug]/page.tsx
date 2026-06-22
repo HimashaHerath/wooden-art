@@ -176,7 +176,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 Call to Enquire
               </a>
               <a
-                href="mailto:info@woodenartgallery.lk"
+                href="mailto:shopwoodenart@gmail.com"
                 className="inline-flex items-center justify-center gap-2 border border-border text-foreground font-sans text-sm px-6 py-3 rounded-md hover:border-accent hover:text-accent transition-polene min-h-[44px]"
               >
                 <Mail className="w-4 h-4" />
@@ -373,10 +373,10 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 </div>
                 <div>
                   <a
-                    href="mailto:info@woodenartgallery.lk"
+                    href="mailto:shopwoodenart@gmail.com"
                     className="text-muted-foreground hover:text-accent transition-polene"
                   >
-                    info@woodenartgallery.lk
+                    shopwoodenart@gmail.com
                   </a>
                 </div>
                 <div className="text-muted-foreground pt-2 border-t border-border">Island-wide delivery available</div>
